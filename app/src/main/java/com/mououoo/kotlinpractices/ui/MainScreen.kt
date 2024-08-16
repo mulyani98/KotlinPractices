@@ -1,10 +1,13 @@
 package com.mououoo.kotlinpractices.ui
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mououoo.kotlinpractices.viewmodel.CounterViewModel
@@ -12,9 +15,9 @@ import com.mououoo.kotlinpractices.viewmodel.CounterViewModel
 @Composable
 fun MainScreen(viewModel: CounterViewModel) {
     // Observe LiveData from ViewModel
-    val value1 = viewModel.valueX.collectAsState()
-    val value2 = viewModel.valueY.collectAsState()
-    val value3 = viewModel.valueZ.collectAsState()
+    val value1 = viewModel.valueX.observeAsState()
+    val value2 = viewModel.valueY.observeAsState()
+    val value3 = viewModel.valueZ.observeAsState()
 
     Column(
         modifier = Modifier
@@ -30,6 +33,11 @@ fun MainScreen(viewModel: CounterViewModel) {
         // Button to increase values
         Button(onClick = { viewModel.increaseValueByFive() }) {
             Text("Increase Values")
+        }
+
+        // Button to increase values
+        Button(onClick = { viewModel.resetValueToDefault() }) {
+            Text("Reset Values")
         }
     }
 }

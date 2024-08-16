@@ -15,4 +15,10 @@ class CounterModel {
         valueY += 5
         valueZ += 5
     }
+
+    fun resetValueToDefault(){
+        valueX = 0
+        valueY = 0
+        valueZ = 0
+    }
 }

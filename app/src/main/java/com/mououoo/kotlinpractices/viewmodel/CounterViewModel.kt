@@ -21,4 +21,11 @@ class CounterViewModel : ViewModel() {
         y.value = counterModel.valueY
         z.value = counterModel.valueZ
     }
+
+    fun resetValueToDefault() {
+        counterModel.resetValueToDefault()
+        x.value = counterModel.valueX
+        y.value = counterModel.valueY
+        z.value = counterModel.valueZ
+    }
 }
