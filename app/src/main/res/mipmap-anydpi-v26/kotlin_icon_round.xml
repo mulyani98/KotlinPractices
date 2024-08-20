@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/kotlin_icon_background"/>
+    <foreground android:drawable="@mipmap/kotlin_icon_foreground"/>
+</adaptive-icon>

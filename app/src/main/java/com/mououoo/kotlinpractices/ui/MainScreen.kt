@@ -1,43 +1,69 @@
 package com.mououoo.kotlinpractices.ui
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mououoo.kotlinpractices.viewmodel.CounterViewModel
+import com.mououoo.kotlinpractices.KotlinNotesActivity
+import com.mououoo.kotlinpractices.R
+import com.mououoo.kotlinpractices.TaskOneActivity
+import com.mououoo.kotlinpractices.TaskTwoActivity
 
 @Composable
-fun MainScreen(viewModel: CounterViewModel) {
-    // Observe LiveData from ViewModel
-    val value1 = viewModel.valueX.observeAsState()
-    val value2 = viewModel.valueY.observeAsState()
-    val value3 = viewModel.valueZ.observeAsState()
+fun MainScreen() {
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .padding(16.dp)
     ) {
-        // Text fields displaying the values
-        Text(text = "Value 1: ${value1.value}")
-        Text(text = "Value 2: ${value2.value}")
-        Text(text = "Value 3: ${value3.value}")
+        Column(
+            modifier = Modifier.align(Alignment.Center), // Center the Column
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally // Center content inside the Column
+        ) {
+            val context = LocalContext.current
 
-        // Button to increase values
-        Button(onClick = { viewModel.increaseValueByFive() }) {
-            Text("Increase Values")
-        }
+            // Button to Task One
+            Button(onClick = {
+                // Navigate to TaskTwoActivity
+                context.startActivity(Intent(context, TaskOneActivity::class.java))
+            }) {
+                Text(text = stringResource(id = R.string.go_to_task_one))
+            }
 
-        // Button to increase values
-        Button(onClick = { viewModel.resetValueToDefault() }) {
-            Text("Reset Values")
+            // Button to Task Two
+            Button(onClick = {
+                // Navigate to TaskTwoActivity
+                context.startActivity(Intent(context, TaskTwoActivity::class.java))
+            }) {
+                Text(text = stringResource(id = R.string.go_to_task_two))
+            }
+
+            // Button to Kotlin Notes
+            Button(onClick = {
+                // Navigate to KotlinNotesActivity
+                context.startActivity(Intent(context, KotlinNotesActivity::class.java))
+            }) {
+                Text(text = stringResource(id = R.string.go_to_kotlin_notes))
+            }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewMainScreen() {
+    MainScreen()
 }

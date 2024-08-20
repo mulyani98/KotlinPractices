@@ -6,9 +6,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/kotlin_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/kotlin_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KotlinPractices"
         tools:targetApi="31" >
@@ -21,6 +21,17 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".TaskOneActivity"
+            android:exported="false">
+        </activity>
+
+        <activity android:name=".TaskTwoActivity"
+            android:exported="false">
+        </activity>
+
+        <activity android:name=".KotlinNotesActivity"
+            android:exported="false">
+        </activity>
 
     </application>
 

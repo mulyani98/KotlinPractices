@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">KotlinPractices</string>
+    <string name="go_to_task_one">Go to Task One</string>
+    <string name="go_to_task_two">Go to Task Two</string>
+    <string name="task_two_description">Buat kelas untuk menjumlah 2 array. Harus ada interface fungsi untuk menjumlah, buat kelas untuk implementasi dari interface tersebut, dan jumlah dua array dengan index yg sama, misal:\n a = {1, 2, 3, 4}\n b = {5, 6, 7}\n c = a + b\n hasil c: 6, 8, 10, 4\n pakai kotlin</string>
+    <string name="result_btn">Result</string>
+    <string name="result_tv">…</string>
+    <string name="back_btn">Back</string>
+    <string name="increase_value">Increase Value</string>
+    <string name="reset_value">Reset Value</string>
+    <string name="position">Position</string>
+    <string name="value_x">Value X: %1$d</string>
+    <string name="value_y">Value Y: %1$d</string>
+    <string name="value_z">Value Z: %1$d</string>
+
+    <string name="go_to_kotlin_notes">Go to Kotlin Notes</string>
+    <string name="kotlin_notes_title">Kotlin Notes</string>
+
 </resources>
