@@ -39,6 +39,14 @@
             android:exported="false">
         </activity>
 
+        <activity android:name=".AboutActivity"
+            android:exported="false">
+        </activity>
+
+        <activity android:name=".WebViewActivity"
+            android:exported="false">
+        </activity>
+
     </application>
 
 </manifest>

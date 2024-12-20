@@ -72,4 +72,7 @@ dependencies {
     implementation (libs.play.services.auth)
     implementation (libs.kotlinx.coroutines.android)
 
+    implementation (libs.androidx.material)
+    implementation (libs.androidx.material.icons.core)
+    implementation (libs.androidx.material.icons.extended)
 }
