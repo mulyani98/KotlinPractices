@@ -1,4 +1,4 @@
-![Kotlin Practices ]
+[Kotlin Practices]
 
 Kotlin Sample App
 ==================
