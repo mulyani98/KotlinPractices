@@ -16,4 +16,7 @@
     <string name="go_to_kotlin_notes">Go to Kotlin Notes</string>
     <string name="kotlin_notes_title">Kotlin Notes</string>
 
+    <string name="go_to_google_sign_in">Go to Google Sign In</string>
+    <string name="google_sign_in">Google Sign In</string>
+
 </resources>

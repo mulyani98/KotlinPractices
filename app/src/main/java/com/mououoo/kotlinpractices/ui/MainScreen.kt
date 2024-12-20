@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mououoo.kotlinpractices.GoogleSignInActivity
 import com.mououoo.kotlinpractices.KotlinNotesActivity
 import com.mououoo.kotlinpractices.R
 import com.mououoo.kotlinpractices.TaskOneActivity
@@ -57,6 +58,14 @@ fun MainScreen() {
                 context.startActivity(Intent(context, KotlinNotesActivity::class.java))
             }) {
                 Text(text = stringResource(id = R.string.go_to_kotlin_notes))
+            }
+
+            // Button to Google Sign In
+            Button(onClick = {
+                // Navigate to Google Sign In Activity
+                context.startActivity(Intent(context, GoogleSignInActivity::class.java))
+            }) {
+                Text(text = stringResource(id = R.string.go_to_google_sign_in))
             }
         }
     }
