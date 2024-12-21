@@ -1,25 +1,40 @@
 package com.mououoo.kotlinpractices.ui
 
+import android.content.Intent
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
-import android.content.Intent
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mououoo.kotlinpractices.R
 import com.mououoo.kotlinpractices.WebViewActivity
+import com.mououoo.kotlinpractices.viewmodel.AboutViewModel
 
 @Composable
-fun AboutScreen() {
+fun AboutScreen(aboutViewModel: AboutViewModel = viewModel()) {
     val context = LocalContext.current
+    val menuItems by aboutViewModel.menuItems.collectAsState()
 
     Scaffold(
         topBar = {
@@ -35,28 +50,13 @@ fun AboutScreen() {
                 .padding(paddingValues)
                 .padding(16.dp)
         ) {
-            MenuItem(stringResource(R.string.home_page)) {
-                val intent = Intent(context, WebViewActivity::class.java).apply {
-                    // Pass the desired URL
-                    putExtra("url", "https://mulyani98.github.io/Home-page-Kotlin-Practices/")
+            menuItems.forEach { menuItem ->
+                MenuItem(menuItem.title) {
+                    val intent = Intent(context, WebViewActivity::class.java).apply {
+                        putExtra("url", menuItem.url)
+                    }
+                    context.startActivity(intent)
                 }
-                context.startActivity(intent)
-            }
-
-            MenuItem(stringResource(R.string.term_of_use)) {
-                val intent = Intent(context, WebViewActivity::class.java).apply {
-                    // Pass the desired URL
-                    putExtra("url", "https://mulyani98.github.io/ToU-Kotlin-Practices/")
-                }
-                context.startActivity(intent)
-            }
-
-            MenuItem(stringResource(R.string.privacy_statement)) {
-                val intent = Intent(context, WebViewActivity::class.java).apply {
-                    // Pass the desired URL
-                    putExtra("url", "https://mulyani98.github.io/PSA-Kotlin-Practices/")
-                }
-                context.startActivity(intent)
             }
         }
     }
@@ -66,7 +66,7 @@ fun AboutScreen() {
 fun MenuItem(text: String, onClick: () -> Unit) {
     Card(
         shape = RoundedCornerShape(8.dp),
-        backgroundColor = Color.LightGray,
+        backgroundColor = MaterialTheme.colors.secondary,
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp)
@@ -79,8 +79,13 @@ fun MenuItem(text: String, onClick: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = text, style = MaterialTheme.typography.body1)
-            Icon(Icons.Filled.ArrowForward, contentDescription = "Go")
+            Text(
+                text = text,
+                style = MaterialTheme.typography.body1,
+                fontWeight = FontWeight.Bold)
+            Icon(
+                Icons.Filled.ArrowForward,
+                contentDescription = "Go")
         }
     }
 }

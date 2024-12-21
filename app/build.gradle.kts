@@ -46,15 +46,23 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.foundation)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.material)
+    implementation(libs.androidx.material.icons.core)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.runtime.livedata)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.runtime.livedata)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
+
+    implementation(libs.googleid)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.play.services.auth)
 
     debugImplementation(libs.androidx.ui.tooling)
 
@@ -63,16 +71,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.androidx.credentials)
-    implementation(libs.googleid)
-
-    // optional - needed for credentials support from play services, for devices running
-    // Android 13 and below.
+    // optional - needed for credentials support from play services, for devices running Android 13 and below.
     implementation(libs.androidx.credentials.play.services.auth)
 
-    implementation (libs.play.services.auth)
-    implementation (libs.kotlinx.coroutines.android)
-
-    implementation (libs.androidx.material)
-    implementation (libs.androidx.material.icons.core)
-    implementation (libs.androidx.material.icons.extended)
 }
