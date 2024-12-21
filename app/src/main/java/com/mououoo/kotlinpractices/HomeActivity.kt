@@ -7,7 +7,7 @@ import com.mououoo.kotlinpractices.ui.MainScreen
 import com.mououoo.kotlinpractices.ui.theme.MyAppTheme
 
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

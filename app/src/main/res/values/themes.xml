@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.KotlinPractices" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/olive_green</item>
 
         <!-- Ensure no default ActionBar is included -->
         <item name="windowActionBar">false</item>
