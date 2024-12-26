@@ -30,9 +30,7 @@ class GoogleSignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyAppTheme {
-                GoogleSignInScreen(
-                    onBackClick = { finish()}
-                )
+                GoogleSignInScreen()
             }
         }
 

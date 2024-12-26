@@ -1,21 +1,25 @@
 package com.mououoo.kotlinpractices.ui
 
+import android.app.Activity
 import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -34,12 +38,27 @@ import com.mououoo.kotlinpractices.viewmodel.AboutViewModel
 @Composable
 fun AboutScreen(aboutViewModel: AboutViewModel = viewModel()) {
     val context = LocalContext.current
+    val activity = LocalContext.current as? Activity
     val menuItems by aboutViewModel.menuItems.collectAsState()
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = stringResource(id = R.string.app_name)) },
+                title = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        IconButton(onClick = {
+                            activity?.finish()
+                        }) {
+                            Icon(
+                                Icons.Filled.ArrowBack,
+                                contentDescription = stringResource(R.string.back_btn))
+                        }
+                        Text(text = stringResource(id = R.string.about))
+                        Spacer(modifier = Modifier.weight(1f))
+                    }
+                },
                 backgroundColor = MaterialTheme.colors.primary
             )
         }

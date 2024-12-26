@@ -60,7 +60,7 @@ fun MainScreen(menuViewModel: MenuHomeViewModel = viewModel()) {
                         IconButton(onClick = {
                             context.startActivity(Intent(context, AboutActivity::class.java))
                         }) {
-                            Icon(Icons.Filled.Info, contentDescription = stringResource(R.string.info))
+                            Icon(Icons.Filled.Info, contentDescription = stringResource(R.string.about))
                         }
                     }
                 },

@@ -28,12 +28,6 @@ class MenuHomeViewModel : ViewModel() {
                 onClick = {
                     context.startActivity(Intent(context, KotlinNotesActivity::class.java))
                 }
-            ),
-            MenuItemData(
-                title = context.getString(R.string.kotlin_notes_title),
-                onClick = {
-                    context.startActivity(Intent(context, KotlinNotesActivity::class.java))
-                }
             )
         )
     }
