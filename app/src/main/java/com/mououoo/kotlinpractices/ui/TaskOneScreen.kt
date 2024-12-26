@@ -2,12 +2,21 @@ package com.mououoo.kotlinpractices.ui
 
 import android.app.Activity
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -27,61 +36,73 @@ fun TaskOneScreen(viewModel: CounterViewModel) {
     val value1 = viewModel.valueX.observeAsState()
     val value2 = viewModel.valueY.observeAsState()
     val value3 = viewModel.valueZ.observeAsState()
+    val context = LocalContext.current
+    val activity = LocalContext.current as? Activity
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-
-        val activity = LocalContext.current as? Activity
-        val context = LocalContext.current
-
-        // Scrollable content
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 60.dp) // Space for the back button
-        ) {
-            item {
-                Text(
-                    text = stringResource(id = R.string.position),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    modifier = Modifier.padding(bottom = 16.dp))
-            }
-
-            item {
-                // Text fields displaying the values
-                Text(text = context.getString(R.string.value_x, value1.value))
-                Text(text = context.getString(R.string.value_y, value2.value))
-                Text(text = context.getString(R.string.value_z, value3.value),
-                    modifier = Modifier.padding(bottom = 16.dp))
-            }
-
-            item {
-                // Button to increase values
-                Button(onClick = { viewModel.increaseValueByFive() }) {
-                    Text(text = stringResource(id = R.string.increase_value))
-                }
-            }
-
-            item {
-                // Button to reset values
-                Button(onClick = { viewModel.resetValueToDefault() }) {
-                    Text(text = stringResource(id = R.string.reset_value))
-                }
-            }
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        IconButton(onClick = {
+                            activity?.finish()
+                        }) {
+                            Icon(
+                                Icons.Filled.ArrowBack,
+                                contentDescription = stringResource(R.string.back_btn))
+                        }
+                        Text(text = stringResource(id = R.string.go_to_task_one))
+                        Spacer(modifier = Modifier.weight(1f))
+                    }
+                },
+                backgroundColor = MaterialTheme.colors.primary
+            )
         }
-
-        // Button to Main Screen (Back Button) at the bottom
-        Button(
-            onClick = { activity?.finish() },
+    ) { paddingValues ->
+        Box(
             modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth()
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp)
         ) {
-            Text(text = stringResource(id = R.string.back_btn))
+            // Scrollable content
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 60.dp) // Space for the back button
+            ) {
+                item {
+                    Text(
+                        text = stringResource(id = R.string.position),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp,
+                        modifier = Modifier.padding(bottom = 16.dp))
+                }
+
+                item {
+                    // Text fields displaying the values
+                    Text(text = context.getString(R.string.value_x, value1.value))
+                    Text(text = context.getString(R.string.value_y, value2.value))
+                    Text(text = context.getString(R.string.value_z, value3.value),
+                        modifier = Modifier.padding(bottom = 16.dp))
+                }
+
+                item {
+                    // Button to increase values
+                    Button(onClick = { viewModel.increaseValueByFive() }) {
+                        Text(text = stringResource(id = R.string.increase_value))
+                    }
+                }
+
+                item {
+                    // Button to reset values
+                    Button(onClick = { viewModel.resetValueToDefault() }) {
+                        Text(text = stringResource(id = R.string.reset_value))
+                    }
+                }
+            }
         }
     }
 }

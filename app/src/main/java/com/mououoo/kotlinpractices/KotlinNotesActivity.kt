@@ -12,9 +12,7 @@ class KotlinNotesActivity : AppCompatActivity() {
 
         setContent {
             MyAppTheme {
-                KotlinNotesScreen(
-                    onBackClick = { finish() }
-                )
+                KotlinNotesScreen()
             }
         }
     }
