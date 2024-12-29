@@ -1,22 +1,19 @@
 package com.mououoo.kotlinpractices
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.GetCredentialResponse
-import androidx.credentials.exceptions.GetCredentialCancellationException
 import androidx.credentials.exceptions.GetCredentialException
-import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
+import androidx.lifecycle.lifecycleScope
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import com.mououoo.kotlinpractices.ui.GoogleSignInScreen
 import com.mououoo.kotlinpractices.ui.theme.MyAppTheme
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
@@ -34,74 +31,153 @@ class GoogleSignInActivity : AppCompatActivity() {
             }
         }
 
-        val signInWithGoogleOption = GetSignInWithGoogleOption.Builder(CLIENT_ID).build()
+        /*
+        * Source:
+        *       https://medium.com/firebase-indonesia/solusi-googlesigninclient-dan-signinclient-deprecated-pada-firebase-auth-dengan-google-04984a0b90df
+        *       https://stackoverflow.com/questions/78503580/how-to-migrate-from-googlesigninclient-to-credential-manager-for-user-authentica
+        *       https://medium.com/@saithitlwin/google-sign-in-for-android-using-credential-manager-dca95eccf794
+        */
+        signIn()
+    }
 
-        // Initialize Credential Manager
-        val credentialManager = CredentialManager.create(this)
+    private fun signIn() {
+        val credentialManager = CredentialManager.create(this) //import from androidx.CredentialManager
 
-        // Create the GetCredentialRequest
-        val request: GetCredentialRequest = GetCredentialRequest.Builder()
-            .addCredentialOption(signInWithGoogleOption)
+        val googleIdOption = GetGoogleIdOption.Builder()
+            .setFilterByAuthorizedAccounts(false)
+            .setServerClientId(CLIENT_ID) //from https://console.firebase.google.com/project/my-firebase-chat-2aac3/authentication/providers
             .build()
 
-        // Launch a coroutine to call the suspend function
-        CoroutineScope(Dispatchers.Main).launch {
+        val request = GetCredentialRequest.Builder() //import from androidx.CredentialManager
+            .addCredentialOption(googleIdOption)
+            .build()
+
+        lifecycleScope.launch {
             try {
-                SafeLogKotlin.d("GSIAnalysis", "Starting Google Sign-In")
-                val result = credentialManager.getCredential(
+                val result: GetCredentialResponse = credentialManager.getCredential( //import from androidx.CredentialManager
                     request = request,
                     context = this@GoogleSignInActivity,
                 )
-                SafeLogKotlin.d("GSIAnalysis", "Google Sign-In successful")
                 handleSignIn(result)
-            } catch (e: GetCredentialException) {
-                Toast.makeText(this@GoogleSignInActivity, "Google Sign-In failed: ${e.errorMessage}", Toast.LENGTH_SHORT).show()
-
-                SafeLogKotlin.e("GSIAnalysis", "Google Sign-In failed: ${e.errorMessage}")
-
-                if (e is GetCredentialCancellationException) {
-                    SafeLogKotlin.e("GSIAnalysis", "Sign-In was cancelled by the user")
-                } else {
-                    SafeLogKotlin.e("GSIAnalysis", "Sign-In failed due to an error: ${e.cause}")
-                }
+            } catch (e: GetCredentialException) { //import from androidx.CredentialManager
+                SafeLogKotlin.d("GoogleSignIn", e.message.toString())
             }
         }
     }
 
     private fun handleSignIn(result: GetCredentialResponse) {
         // Handle the successfully returned credential.
-        val credential = result.credential
-
-        if (credential is CustomCredential) {
-            // Check if the credential type is Google ID Token credential
-            if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
-                try {
-                    // Extract the Google ID token from the credential
-                    val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
-
-                    // Use the ID Token to validate and authenticate the user on your server
-                    val idToken = googleIdTokenCredential.idToken
-                    val displayName = googleIdTokenCredential.displayName
-
-                    // Log the values to ensure everything is correct
-                    SafeLogKotlin.d("GSIAnalysis", "Google ID Token: $idToken")
-                    SafeLogKotlin.d("GSIAnalysis", "Display Name: $displayName")
-
-                    // Now you can send this ID Token to your server for validation and authentication
-                    // Example: send to your server using a network request
-
-                } catch (e: GoogleIdTokenParsingException) {
-                    SafeLogKotlin.e("GSIAnalysis", "Received an invalid Google ID token", e)
+        when (val credential = result.credential) {
+            is CustomCredential -> {
+                if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
+                    try {
+                        // Use googleIdTokenCredential and extract id to validate and authenticate on your server.
+                        val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
+                        // lets find out about this item, this api still red
+//                        firebaseAuthWithGoogle(googleIdTokenCredential.idToken)
+                    } catch (e: GoogleIdTokenParsingException) {
+                        SafeLogKotlin.e("GoogleSignIn", "Received an invalid google id token response", e)
+                    }
+                } else {
+                    // Catch any unrecognized custom credential type here.
+                    SafeLogKotlin.e("GoogleSignIn", "Unexpected type of credential")
                 }
-            } else {
-                // If the credential is not of the expected type
-                SafeLogKotlin.e("GSIAnalysis", "Unexpected credential type: ${credential.type}")
             }
-        } else {
-            // If the credential is not a CustomCredential
-            SafeLogKotlin.e("GSIAnalysis", "Unexpected credential type: $credential")
+
+            else -> {
+                // Catch any unrecognized credential type here.
+                SafeLogKotlin.e("GoogleSignIn", "Unexpected type of credential")
+            }
         }
     }
+
+//    private fun handleSignInTwo(result: GetCredentialResponse) {
+//        val credential = result.credential
+//        // Replace with appropriate type checking and usage
+//        Toast.makeText(this, "Signed in successfully!", Toast.LENGTH_SHORT).show()
+//    }
+//
+//    private fun getMainExecutorCompat(): Executor {
+//        return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+//            this.mainExecutor
+//        } else {
+//            Executor { command -> Handler(Looper.getMainLooper()).post(command) }
+//        }
+//    }
+//
+//    private fun extractIdToken(response: GetCredentialResponse): String? {
+//        val credential = response.credential
+//        if (credential is CustomCredential && credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
+//            return try {
+//                val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
+//                googleIdTokenCredential.idToken
+//            } catch (e: Exception) {
+//                Toast.makeText(this, "Invalid ID Token: ${e.message}", Toast.LENGTH_SHORT).show()
+//                null
+//            }
+//        }
+//        return null
+//    }
+//
+//    private fun validateIdToken(idToken: String) {
+//        val url = "https://oauth2.googleapis.com/tokeninfo?id_token=$idToken"
+//
+//        val queue = Volley.newRequestQueue(this)
+//        val request = StringRequest(
+//            Request.Method.GET, url,
+//            { response ->
+//                val jsonResponse = JSONObject(response)
+//                val email = jsonResponse.getString("email")
+//                val name = jsonResponse.getString("name")
+//                val audience = jsonResponse.getString("aud")
+//
+//                if (audience == CLIENT_ID) {
+//                    Toast.makeText(this, "Welcome $name ($email)", Toast.LENGTH_SHORT).show()
+//                } else {
+//                    Toast.makeText(this, "Invalid Client ID", Toast.LENGTH_SHORT).show()
+//                }
+//            },
+//            { error ->
+//                Toast.makeText(this, "Token validation failed: ${error.message}", Toast.LENGTH_SHORT).show()
+//            }
+//        )
+//        queue.add(request)
+//    }
+//
+//    private fun handleSignIn(result: GetCredentialResponse) {
+//        // Handle the successfully returned credential.
+//        val credential = result.credential
+//
+//        if (credential is CustomCredential) {
+//            // Check if the credential type is Google ID Token credential
+//            if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
+//                try {
+//                    // Extract the Google ID token from the credential
+//                    val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
+//
+//                    // Use the ID Token to validate and authenticate the user on your server
+//                    val idToken = googleIdTokenCredential.idToken
+//                    val displayName = googleIdTokenCredential.displayName
+//
+//                    // Log the values to ensure everything is correct
+//                    SafeLogKotlin.d("GSIAnalysis", "Google ID Token: $idToken")
+//                    SafeLogKotlin.d("GSIAnalysis", "Display Name: $displayName")
+//
+//                    // Now you can send this ID Token to your server for validation and authentication
+//                    // Example: send to your server using a network request
+//
+//                } catch (e: GoogleIdTokenParsingException) {
+//                    SafeLogKotlin.e("GSIAnalysis", "Received an invalid Google ID token", e)
+//                }
+//            } else {
+//                // If the credential is not of the expected type
+//                SafeLogKotlin.e("GSIAnalysis", "Unexpected credential type: ${credential.type}")
+//            }
+//        } else {
+//            // If the credential is not a CustomCredential
+//            SafeLogKotlin.e("GSIAnalysis", "Unexpected credential type: $credential")
+//        }
+//    }
 
 //    private fun handleSignIn(result: GetCredentialResponse) {
 //        // Handle the successfully returned credential.
