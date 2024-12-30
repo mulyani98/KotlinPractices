@@ -5,6 +5,15 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        create("release") {
+            storeFile =
+                file("/Users/iei21040006/AndroidStudioProjects/KotlinPractices/keystore_release")
+            keyAlias = "kM"
+            storePassword = "kotlinMououoo"
+            keyPassword = "kMpassword"
+        }
+    }
     namespace = "com.mououoo.kotlinpractices"
     compileSdk = 34
 
@@ -16,6 +25,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig = signingConfigs.getByName("release")
     }
 
     buildTypes {
