@@ -40,6 +40,10 @@
             android:exported="false">
         </activity>
 
+        <activity android:name=".OldGoogleSignInActivity"
+            android:exported="false">
+        </activity>
+
         <activity android:name=".AboutActivity"
             android:exported="false">
         </activity>

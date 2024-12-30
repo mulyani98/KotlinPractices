@@ -17,6 +17,7 @@
     <string name="kotlin_notes_title">Kotlin Notes</string>
 
     <string name="google_sign_in">Google Sign In</string>
+    <string name="old_google_sign_in">Old Google Sign In</string>
 
     <string name="about">About</string>
     <string name="term_of_use">Term Of Use</string>

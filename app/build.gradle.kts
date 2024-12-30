@@ -85,6 +85,7 @@ dependencies {
     implementation(libs.androidx.credentials.play.services.auth)
 
     implementation (libs.volley)
+    implementation (libs.firebase.auth)
 
 
 }
