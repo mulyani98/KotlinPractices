@@ -53,6 +53,15 @@ android {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
 
+    // Add the packagingOptions block
+    packagingOptions {
+        exclude("META-INF/DEPENDENCIES")
+        exclude ("META-INF/LICENSE")
+        exclude ("META-INF/LICENSE.txt")
+        exclude ("META-INF/NOTICE")
+        exclude ("META-INF/NOTICE.txt")
+    }
+
 }
 
 dependencies {
@@ -87,5 +96,10 @@ dependencies {
     implementation (libs.volley)
     implementation (libs.firebase.auth)
 
+    implementation (libs.google.api.client.android)
+    implementation (libs.google.api.services.drive)
+    implementation (libs.okhttp)
+    implementation (libs.gson)
+    implementation (libs.google.api.client.gson)
 
 }
