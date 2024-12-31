@@ -1,6 +1,7 @@
 package com.mououoo.kotlinpractices
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.credentials.CredentialManager
@@ -15,6 +16,7 @@ import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingExcept
 import com.google.firebase.Firebase
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
 import com.mououoo.kotlinpractices.ui.GoogleSignInScreen
@@ -28,7 +30,9 @@ class GoogleSignInActivity : AppCompatActivity() {
 
     companion object {
         // Define any static members here
-        private const val  CLIENT_ID = "578060869145-bcbhaecvb7p7dkvfccccibp8oo6lc5jt.apps.googleusercontent.com"
+        private const val  CLIENT_ID_DEBUG = "578060869145-n6671mce6ld8akc2hvt0obhtfmohu80i.apps.googleusercontent.com"
+        private const val  CLIENT_ID_RELEASE = "578060869145-bcbhaecvb7p7dkvfccccibp8oo6lc5jt.apps.googleusercontent.com"
+        private const val  CLIENT_ID_WEB = "578060869145-97i1evdjtjvq51qn9kjlb0hno15igi3b.apps.googleusercontent.com"
         private const val  TAG = "GoogleSignIn"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,13 +45,6 @@ class GoogleSignInActivity : AppCompatActivity() {
 
         // Initialize Firebase Auth
         auth = Firebase.auth
-
-        /*
-        * Source:
-        *       https://medium.com/firebase-indonesia/solusi-googlesigninclient-dan-signinclient-deprecated-pada-firebase-auth-dengan-google-04984a0b90df
-        *       https://stackoverflow.com/questions/78503580/how-to-migrate-from-googlesigninclient-to-credential-manager-for-user-authentica
-        *       https://medium.com/@saithitlwin/google-sign-in-for-android-using-credential-manager-dca95eccf794
-        */
         signIn()
     }
 
@@ -56,7 +53,7 @@ class GoogleSignInActivity : AppCompatActivity() {
 
         val googleIdOption = GetGoogleIdOption.Builder()
             .setFilterByAuthorizedAccounts(false)
-            .setServerClientId(CLIENT_ID) //from https://console.firebase.google.com/project/my-firebase-chat-2aac3/authentication/providers
+            .setServerClientId(CLIENT_ID_WEB) //from https://console.firebase.google.com/project/my-firebase-chat-2aac3/authentication/providers
             .build()
 
         val request = GetCredentialRequest.Builder() //import from androidx.CredentialManager
@@ -71,9 +68,10 @@ class GoogleSignInActivity : AppCompatActivity() {
                 )
                 handleSignIn(result)
             } catch (e: GetCredentialException) { //import from androidx.CredentialManager
-                SafeLogKotlin.d(TAG, "Client ID: $CLIENT_ID")
+                Toast.makeText(this@GoogleSignInActivity, "Google Sign-In failed: ${e.errorMessage}", Toast.LENGTH_SHORT).show()
+                SafeLogKotlin.d(TAG, "Client ID: $CLIENT_ID_WEB")
                 SafeLogKotlin.d(TAG, "Request created: $request")
-                SafeLogKotlin.d(TAG, e.message.toString())
+                SafeLogKotlin.e(TAG, e.message.toString())
             }
         }
     }
@@ -109,13 +107,13 @@ class GoogleSignInActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    SafeLogKotlin.d(TAG, "signInWithCredential:success")
-//                    val user: FirebaseUser? = auth.currentUser
-//                    updateUI(user)
+                    val user: FirebaseUser? = auth.currentUser
+                    Toast.makeText(this@GoogleSignInActivity, "Google Sign-In Success", Toast.LENGTH_SHORT).show()
+                    SafeLogKotlin.d(TAG, "signInWithCredential: success")
+                    SafeLogKotlin.d(TAG, "user: $user")
                 } else {
                     // If sign in fails, display a message to the user.
-                    SafeLogKotlin.e(TAG, "signInWithCredential:failure" + task.exception)
-//                    updateUI(null)
+                    SafeLogKotlin.e(TAG, "signInWithCredential failure: $task.exception")
                 }
             }
     }

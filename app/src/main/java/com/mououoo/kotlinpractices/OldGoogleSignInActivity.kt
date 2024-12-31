@@ -24,7 +24,9 @@ class OldGoogleSignInActivity : AppCompatActivity() {
 
     companion object {
         // Define any static members here
-        private const val  CLIENT_ID = "578060869145-bcbhaecvb7p7dkvfccccibp8oo6lc5jt.apps.googleusercontent.com"
+        private const val  CLIENT_ID_DEBUG = "578060869145-n6671mce6ld8akc2hvt0obhtfmohu80i.apps.googleusercontent.com"
+        private const val  CLIENT_ID_RELEASE = "578060869145-bcbhaecvb7p7dkvfccccibp8oo6lc5jt.apps.googleusercontent.com"
+        private const val  CLIENT_ID_WEB = "578060869145-97i1evdjtjvq51qn9kjlb0hno15igi3b.apps.googleusercontent.com"
         private const val  TAG = "GoogleSignIn"
     }
 
@@ -36,7 +38,7 @@ class OldGoogleSignInActivity : AppCompatActivity() {
             }
         }
 
-        val signInWithGoogleOption = GetSignInWithGoogleOption.Builder(CLIENT_ID).build()
+        val signInWithGoogleOption = GetSignInWithGoogleOption.Builder(CLIENT_ID_WEB).build()
 
         // Initialize Credential Manager
         val credentialManager = CredentialManager.create(this)
@@ -55,6 +57,7 @@ class OldGoogleSignInActivity : AppCompatActivity() {
                     context = this@OldGoogleSignInActivity,
                 )
                 SafeLogKotlin.d(TAG, "Google Sign-In successful")
+                Toast.makeText(this@OldGoogleSignInActivity, "Google Sign-In successful", Toast.LENGTH_SHORT).show()
                 handleSignIn(result)
             } catch (e: GetCredentialException) {
                 Toast.makeText(this@OldGoogleSignInActivity, "Google Sign-In failed: ${e.errorMessage}", Toast.LENGTH_SHORT).show()
@@ -65,6 +68,7 @@ class OldGoogleSignInActivity : AppCompatActivity() {
                     SafeLogKotlin.e(TAG, "Sign-In was cancelled by the user")
                 } else {
                     SafeLogKotlin.e(TAG, "Sign-In failed due to an error: ${e.cause}")
+                    SafeLogKotlin.e(TAG, "Sign-In failed due to an error: ${e.type}")
                 }
             }
         }

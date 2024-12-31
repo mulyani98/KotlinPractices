@@ -1,0 +1,28 @@
+Kotlin Practices Notes
+
+>> GSI deprecated, useful links
+    https://console.cloud.google.com/apis/credentials?authuser=3&inv=1&invt=AbljSQ&project=kotlin-practices-6ba63&supportedpurview=project
+
+    https://developer.android.com/identity/sign-in/credential-manager-siwg
+    https://developer.android.com/identity/sign-in/legacy-gsi-migration
+    https://developer.android.com/identity/sign-in/credential-manager
+    https://developer.android.com/design/ui/mobile/guides/patterns/passkeys
+    https://developers.google.com/identity/one-tap/android/legacy-get-saved-credentials
+    https://developers.google.com/identity/one-tap/android/legacy-get-started
+    https://developers.google.com/identity/sign-in/android/legacy-gsi-start
+    https://developers.google.com/android/guides/client-auth
+    https://developers.googleblog.com/en/simple-and-secure-sign-in-on-android-with-credential-manager-and-passkeys/
+
+    https://www.googlecloudcommunity.com/gc/Developer-Tools/Error-10-Developer-console-is-not-set-up-correctly-Not-Using/m-p/618789
+    https://support.google.com/googleplay/android-developer/thread/235405590/google-sign-in-will-stop-working-after-signing-the-app-in-play-console?hl=en
+    https://codelabs.developers.google.com/credential-manager-api-for-android#0
+
+    https://medium.com/firebase-indonesia/solusi-googlesigninclient-dan-signinclient-deprecated-pada-firebase-auth-dengan-google-04984a0b90df
+    https://medium.com/@saithitlwin/google-sign-in-for-android-using-credential-manager-dca95eccf794
+
+    https://speakerdeck.com/clockvoid/google-sign-innoyi-xing-karashi-merucredential-managerhuo-yong
+    https://2024.droidkaigi.jp/timetable/694563/
+
+    https://stackoverflow.com/questions/76823978/error-10-developer-console-is-not-set-up-correctly-not-using-firebase-one-t
+    https://stackoverflow.com/questions/78503580/how-to-migrate-from-googlesigninclient-to-credential-manager-for-user-authentica
+
