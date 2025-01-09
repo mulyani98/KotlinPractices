@@ -39,9 +39,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mououoo.kotlinpractices.AboutActivity
-import com.mououoo.kotlinpractices.GoogleSignInActivity
-import com.mououoo.kotlinpractices.OldGoogleSignInActivity
 import com.mououoo.kotlinpractices.R
+import com.mououoo.kotlinpractices.SignedGoogleAccount
 import com.mououoo.kotlinpractices.viewmodel.MenuHomeViewModel
 
 @Composable
@@ -95,17 +94,9 @@ fun MainScreen(menuViewModel: MenuHomeViewModel = viewModel()) {
             Spacer(modifier = Modifier.height(16.dp))
 
             HomeItemWithIcon(
-                text = stringResource(id = R.string.google_sign_in),
+                text = stringResource(id = R.string.sign_in),
                 onClick = {
-                    context.startActivity(Intent(context, GoogleSignInActivity::class.java))
-                },
-                iconRes = R.mipmap.ic_google_sign_in
-            )
-
-            HomeItemWithIcon(
-                text = stringResource(id = R.string.old_google_sign_in),
-                onClick = {
-                    context.startActivity(Intent(context, OldGoogleSignInActivity::class.java))
+                    context.startActivity(Intent(context, SignedGoogleAccount::class.java))
                 },
                 iconRes = R.mipmap.ic_google_sign_in
             )
