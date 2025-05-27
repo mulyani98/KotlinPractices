@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.mououoo.kotlinpractices.KotlinNotesActivity
 import com.mououoo.kotlinpractices.R
 import com.mououoo.kotlinpractices.TaskOneActivity
+import com.mououoo.kotlinpractices.TaskThreeActivity
 import com.mououoo.kotlinpractices.TaskTwoActivity
 
 class MenuHomeViewModel : ViewModel() {
@@ -21,6 +22,12 @@ class MenuHomeViewModel : ViewModel() {
                 title = context.getString(R.string.go_to_task_two),
                 onClick = {
                     context.startActivity(Intent(context, TaskTwoActivity::class.java))
+                }
+            ),
+            MenuItemData(
+                title = context.getString(R.string.go_to_task_three),
+                onClick = {
+                    context.startActivity(Intent(context, TaskThreeActivity::class.java))
                 }
             ),
             MenuItemData(
