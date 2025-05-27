@@ -15,12 +15,12 @@ android {
         }
     }
     namespace = "com.mououoo.kotlinpractices"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.mououoo.kotlinpractices"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -52,22 +52,26 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
+    packaging {
+        resources {
+            excludes += setOf(
+                "META-INF/DEPENDENCIES",
+                "META-INF/LICENSE",
+                "META-INF/LICENSE.txt",
+                "META-INF/NOTICE",
+                "META-INF/NOTICE.txt"
+            )
+        }
+    }
 
     // Add the packagingOptions block
-    packagingOptions {
-        exclude("META-INF/DEPENDENCIES")
-        exclude ("META-INF/LICENSE")
-        exclude ("META-INF/LICENSE.txt")
-        exclude ("META-INF/NOTICE")
-        exclude ("META-INF/NOTICE.txt")
-    }
 
 }
 
 dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
-    implementation (libs.activity.ktx)
+    implementation(libs.activity.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.foundation)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -79,28 +83,12 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.tooling.preview)
 
-    implementation(libs.googleid)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.lifecycle.viewmodel.compose)
-    implementation(libs.play.services.auth)
 
     debugImplementation(libs.androidx.ui.tooling)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation(libs.androidx.credentials)
-    // optional - needed for credentials support from play services, for devices running Android 13 and below.
-    implementation(libs.androidx.credentials.play.services.auth)
-
-    implementation (libs.volley)
-    implementation (libs.firebase.auth)
-
-    implementation (libs.google.api.client.android)
-    implementation (libs.google.api.services.drive)
-    implementation (libs.okhttp)
-    implementation (libs.gson)
-    implementation (libs.google.api.client.gson)
-
 }

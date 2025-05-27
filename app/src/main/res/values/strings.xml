@@ -16,12 +16,6 @@
     <string name="go_to_kotlin_notes">Go to Kotlin Notes</string>
     <string name="kotlin_notes_title">Kotlin Notes</string>
 
-    <string name="google_sign_in">Bottom Sheet Google Sign In</string>
-    <string name="old_google_sign_in">Button UI Google Sign In</string>
-    <string name="signed_google_trial">Signed Google Trial</string>
-    <string name="sign_in">Sign In Google</string>
-    <string name="sign_out">Sign Out Google</string>
-
     <string name="about">About</string>
     <string name="term_of_use">Term Of Use</string>
     <string name="privacy_statement">Privacy Statement</string>
