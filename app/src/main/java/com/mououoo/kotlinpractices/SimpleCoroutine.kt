@@ -21,6 +21,7 @@ class SimpleCoroutine : AppCompatActivity() {
     private lateinit var btnCancel: Button
     private var wasCancelled = false
 
+    // Job represents a cancellable unit of work in Kotlin Coroutines. It allows managing coroutine execution.
     private var job: Job? = null  // control coroutine
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,10 +47,12 @@ class SimpleCoroutine : AppCompatActivity() {
         tvStatus.text = getString(R.string.running_coroutine_task)
         btnCancel.isEnabled = true
 
-        // Launch coroutine on thread background
+        // Dispatchers in Kotlin Coroutines determine the thread on which a coroutine runs.
+        // Dispatchers.Default -> Launch coroutine on thread background
         job = CoroutineScope(Dispatchers.Default).launch {
             try {
                 delay(3000) // delay non-blocking 3 sec
+                // Dispatchers.Main -> Update UI on main thread
                 withContext(Dispatchers.Main) {
                     tvStatus.text = getString(R.string.coroutine_task_finished)
                 }
@@ -67,6 +70,7 @@ class SimpleCoroutine : AppCompatActivity() {
     }
 
     private fun cancelCoroutineTask() {
+        // cancel coroutine
         job?.cancel()
         tvStatus.text = getString(R.string.cancelled_by_user)
         progressBar.visibility = ProgressBar.GONE

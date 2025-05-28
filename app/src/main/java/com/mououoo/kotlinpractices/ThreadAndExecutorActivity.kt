@@ -19,7 +19,9 @@ class ThreadAndExecutorActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var tvStatus: TextView
 
+    // handler for update UI
     private val handler = Handler(Looper.getMainLooper())
+    // Bikin satu-satunya thread di dalam ExecutorService, biar task yang dijalanin pakai executor (contoh yang future) bisa antri satu per satu.
     private val executor: ExecutorService = Executors.newSingleThreadExecutor()
 
     // Executor task
@@ -56,6 +58,7 @@ class ThreadAndExecutorActivity : AppCompatActivity() {
         tvStatus.text = getString(R.string.running_with_thread)
         btnCancel.isEnabled = true
 
+        // running thread
         runningThread = Thread {
             try {
                 Thread.sleep(3000) // Delay 3 sec
@@ -74,6 +77,7 @@ class ThreadAndExecutorActivity : AppCompatActivity() {
         tvStatus.text = getString(R.string.running_with_executor)
         btnCancel.isEnabled = true
 
+        // running executor
         executorFuture = executor.submit {
             try {
                 Thread.sleep(3000)  // Delay 3 sec
@@ -90,8 +94,8 @@ class ThreadAndExecutorActivity : AppCompatActivity() {
         btnCancel.isEnabled = false
         tvStatus.text = getString(R.string.cancelling)
 
-        runningThread?.interrupt()
-        executorFuture?.cancel(true)
+        runningThread?.interrupt() // cancel thread
+        executorFuture?.cancel(true) // cancel current executor
     }
 
     private fun resetUI() {
@@ -114,7 +118,7 @@ class ThreadAndExecutorActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        executor.shutdownNow()
+        executor.shutdownNow() // cancel all task on executor service
         runningThread?.interrupt()
     }
 }
