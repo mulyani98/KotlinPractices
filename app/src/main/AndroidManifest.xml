@@ -49,6 +49,14 @@
             android:exported="false" />
 
         <activity
+            android:name=".SimpleCoroutine"
+            android:exported="false" />
+
+        <activity
+            android:name=".ThreadAndExecutorActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".AboutActivity"
             android:exported="false" />
 

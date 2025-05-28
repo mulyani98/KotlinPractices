@@ -22,6 +22,7 @@
     <string name="privacy_statement">Privacy Statement</string>
     <string name="home_page">Home Page</string>
     <string name="coroutine_title">Coroutine</string>
+    <string name="simple_coroutine_title">Simple Coroutine</string>
     <string name="run_dispatcher_default">Run Dispatcher Default</string>
     <string name="text_not_executed">Not yet executed</string>
     <string name="run_dispatcher_io">Run Dispatcher IO</string>
@@ -36,6 +37,25 @@
     <string name="fetch_data_canceled">❌ Fetch data canceled</string>
     <string name="running_on">Running on: %1$s</string>
     <string name="dispatcher_not_running">ℹ️ No Dispatcher is running</string>
+
+    <string name="thread_and_executor_title">Thread Executor</string>
+    <string name="running_with_thread">⏳Running with Thread…</string>
+    <string name="thread_finished">✅Thread Finished</string>
+    <string name="running_with_executor">⏳Running with Executor…</string>
+    <string name="executor_finished">✅Executor Finished</string>
+    <string name="cancelling">❌Cancelling…</string>
+    <string name="start_with_thread">Start with Thread</string>
+    <string name="start_with_executor">Start with Executor</string>
+    <string name="cancel">Cancel</string>
+    <string name="idle">Idle</string>
+    <string name="thread_cancelled_interrupted">Thread cancelled/interrupted</string>
+    <string name="executor_task_cancelled_interrupted">Executor task cancelled/interrupted</string>
+    <string name="start_coroutine">Start Coroutine</string>
+    <string name="cancelling_coroutine">⏳Cancelling coroutine…</string>
+    <string name="coroutine_task_cancelled">❌Coroutine task cancelled</string>
+    <string name="coroutine_task_finished">✅Coroutine task finished</string>
+    <string name="running_coroutine_task">⏳Running Coroutine task…</string>
+    <string name="cancelled_by_user">Cancelled by user</string>
 
 
 </resources>
