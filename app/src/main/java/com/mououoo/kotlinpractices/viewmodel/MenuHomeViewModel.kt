@@ -3,6 +3,7 @@ package com.mououoo.kotlinpractices.viewmodel
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModel
+import com.mououoo.kotlinpractices.CoroutineActivity
 import com.mououoo.kotlinpractices.KotlinNotesActivity
 import com.mououoo.kotlinpractices.R
 import com.mououoo.kotlinpractices.TaskOneActivity
@@ -34,6 +35,12 @@ class MenuHomeViewModel : ViewModel() {
                 title = context.getString(R.string.kotlin_notes_title),
                 onClick = {
                     context.startActivity(Intent(context, KotlinNotesActivity::class.java))
+                }
+            ),
+            MenuItemData(
+                title = context.getString(R.string.coroutine_title),
+                onClick = {
+                    context.startActivity(Intent(context, CoroutineActivity::class.java))
                 }
             )
         )

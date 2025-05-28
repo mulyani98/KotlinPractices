@@ -30,27 +30,31 @@
 
         <activity
             android:name=".TaskOneActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
 
         <activity
             android:name=".TaskTwoActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
 
         <activity
             android:name=".TaskThreeActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
 
         <activity
             android:name=".KotlinNotesActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
+
+        <activity
+            android:name=".CoroutineActivity"
+            android:exported="false" />
 
         <activity
             android:name=".AboutActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
 
         <activity
             android:name=".WebViewActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
 
     </application>
 

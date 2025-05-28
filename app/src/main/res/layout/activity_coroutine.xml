@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/resultTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_not_executed"
+            android:textSize="18sp"
+            android:padding="16dp" />
+
+        <Button
+            android:id="@+id/runFetchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/run_fetch_data"
+            android:backgroundTint="@color/sand_white"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/cancelFetchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel_fetch"
+            android:backgroundTint="@color/sand_white"
+            android:layout_marginTop="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CCC"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp" />
+
+        <Button
+            android:id="@+id/runDefaultButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/run_dispatcher_default"
+            android:backgroundTint="@color/sand_white"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/runIOButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/run_dispatcher_io"
+            android:backgroundTint="@color/sand_white"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/runMainButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/run_dispatcher_main"
+            android:backgroundTint="@color/sand_white"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/runUnconfinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/run_dispatcher_unconfined"
+            android:backgroundTint="@color/sand_white"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/cancelDispatcherButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel_run_dispatcher"
+            android:backgroundTint="@color/sand_white"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+</ScrollView>
