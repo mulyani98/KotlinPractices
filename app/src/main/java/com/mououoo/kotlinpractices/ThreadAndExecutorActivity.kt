@@ -21,7 +21,8 @@ class ThreadAndExecutorActivity : AppCompatActivity() {
 
     // handler for update UI
     private val handler = Handler(Looper.getMainLooper())
-    // Bikin satu-satunya thread di dalam ExecutorService, biar task yang dijalanin pakai executor (contoh yang future) bisa antri satu per satu.
+
+    // Create a single-threaded ExecutorService so that tasks executed with the executor (such as those using Future) are queued and run one at a time.
     private val executor: ExecutorService = Executors.newSingleThreadExecutor()
 
     // Executor task
