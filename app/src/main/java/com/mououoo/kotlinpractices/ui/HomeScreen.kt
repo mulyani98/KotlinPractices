@@ -63,7 +63,10 @@ fun MainScreen(menuViewModel: MenuHomeViewModel = viewModel()) {
                         IconButton(onClick = {
                             context.startActivity(Intent(context, AboutActivity::class.java))
                         }) {
-                            Icon(Icons.Filled.Info, contentDescription = stringResource(R.string.about))
+                            Icon(
+                                Icons.Filled.Info,
+                                contentDescription = stringResource(R.string.about)
+                            )
                         }
                     }
                 },
@@ -72,13 +75,13 @@ fun MainScreen(menuViewModel: MenuHomeViewModel = viewModel()) {
         },
         modifier = Modifier.padding(insets)
     ) { paddingValues ->
-        Column (
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
                 .padding(16.dp),
             verticalArrangement = Arrangement.SpaceBetween
-        ){
+        ) {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 modifier = Modifier
@@ -91,7 +94,8 @@ fun MainScreen(menuViewModel: MenuHomeViewModel = viewModel()) {
                 items(menuItems) { menuItem ->
                     HomeItem(
                         text = menuItem.title,
-                        onClick = menuItem.onClick)
+                        onClick = menuItem.onClick
+                    )
                 }
             }
 
@@ -124,7 +128,8 @@ fun HomeItem(text: String, onClick: () -> Unit) {
                 .fillMaxWidth(),
             contentAlignment = Alignment.Center
         ) {
-            Text(text = text,
+            Text(
+                text = text,
                 style = MaterialTheme.typography.body1.copy(
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp

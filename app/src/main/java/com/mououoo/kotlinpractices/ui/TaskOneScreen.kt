@@ -1,6 +1,6 @@
 package com.mououoo.kotlinpractices.ui
 
-import android.app.Activity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mououoo.kotlinpractices.R
@@ -37,7 +36,7 @@ fun TaskOneScreen(viewModel: CounterViewModel) {
     val value2 = viewModel.valueY.observeAsState()
     val value3 = viewModel.valueZ.observeAsState()
     val context = LocalContext.current
-    val activity = LocalContext.current as? Activity
+    val activity = LocalActivity.current
 
     Scaffold(
         topBar = {
@@ -51,7 +50,8 @@ fun TaskOneScreen(viewModel: CounterViewModel) {
                         }) {
                             Icon(
                                 Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = stringResource(R.string.back_btn))
+                                contentDescription = stringResource(R.string.back_btn)
+                            )
                         }
                         Text(text = stringResource(id = R.string.go_to_task_one))
                         Spacer(modifier = Modifier.weight(1f))
@@ -78,15 +78,18 @@ fun TaskOneScreen(viewModel: CounterViewModel) {
                         text = stringResource(id = R.string.position),
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp,
-                        modifier = Modifier.padding(bottom = 16.dp))
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
                 }
 
                 item {
                     // Text fields displaying the values
                     Text(text = context.getString(R.string.value_x, value1.value))
                     Text(text = context.getString(R.string.value_y, value2.value))
-                    Text(text = context.getString(R.string.value_z, value3.value),
-                        modifier = Modifier.padding(bottom = 16.dp))
+                    Text(
+                        text = context.getString(R.string.value_z, value3.value),
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
                 }
 
                 item {
@@ -105,13 +108,4 @@ fun TaskOneScreen(viewModel: CounterViewModel) {
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewTaskOneScreen() {
-    val viewModel = CounterViewModel()
-    TaskOneScreen(
-        viewModel = viewModel
-    )
 }

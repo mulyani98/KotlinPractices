@@ -1,6 +1,6 @@
 package com.mououoo.kotlinpractices.ui
 
-import android.app.Activity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,7 +25,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -40,9 +39,9 @@ fun TaskThreeScreen(
     onRunMain: (onResult: (String) -> Unit) -> Unit,
     onRunUnconfined: (onResult: (String) -> Unit) -> Unit
 ) {
-    val activity = LocalContext.current as? Activity
+    val activity = LocalActivity.current
     val coroutineScope = rememberCoroutineScope()
-    var result by remember { mutableStateOf("Belum dijalankan") }
+    var result by remember { mutableStateOf("Not yet running") }
 
     Scaffold(
         topBar = {
@@ -59,7 +58,7 @@ fun TaskThreeScreen(
                                 contentDescription = stringResource(R.string.back_btn)
                             )
                         }
-                        Text(text = stringResource(id = R.string.go_to_task_three))
+                        Text(text = stringResource(id = R.string.go_to_dispatcher_type))
                         Spacer(modifier = Modifier.weight(1f))
                     }
                 },
@@ -75,7 +74,7 @@ fun TaskThreeScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = result) // ✅ Menampilkan hasil coroutine
+            Text(text = result) // ✅ Displaying coroutine results
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -84,7 +83,7 @@ fun TaskThreeScreen(
                     result = fetchData()
                 }
             }) {
-                Text("Jalankan Coroutine")
+                Text("Running coroutine")
             }
 
             Button(onClick = {
@@ -120,10 +119,10 @@ fun TaskThreeScreen(
 }
 
 
-// Simulasi suspend function
+// Suspend function simulation
 suspend fun fetchData(): String {
-    delay(2000) // Simulasi delay 2 detik
-    return "✅ Data berhasil diambil dari coroutine!"
+    delay(2000) // 2 sec delay simulation
+    return "✅ Data successfully retrieved from the coroutine!"
 }
 
 @Preview(showBackground = true)

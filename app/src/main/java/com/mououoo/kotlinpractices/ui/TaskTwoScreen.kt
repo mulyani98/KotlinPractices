@@ -1,6 +1,6 @@
 package com.mououoo.kotlinpractices.ui
 
-import android.app.Activity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,7 +23,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,7 +34,7 @@ import com.mououoo.kotlinpractices.viewmodel.ArraySummationViewModel
 fun TaskTwoScreen(viewModel: ArraySummationViewModel) {
     // Observe the result LiveData from the ViewModel
     val result by viewModel.result.observeAsState("")
-    val activity = LocalContext.current as? Activity
+    val activity = LocalActivity.current
 
     Scaffold(
         topBar = {
@@ -49,7 +48,8 @@ fun TaskTwoScreen(viewModel: ArraySummationViewModel) {
                         }) {
                             Icon(
                                 Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = stringResource(R.string.back_btn))
+                                contentDescription = stringResource(R.string.back_btn)
+                            )
                         }
                         Text(text = stringResource(id = R.string.go_to_task_two))
                         Spacer(modifier = Modifier.weight(1f))

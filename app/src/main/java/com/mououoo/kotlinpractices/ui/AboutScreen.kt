@@ -1,7 +1,7 @@
 package com.mououoo.kotlinpractices.ui
 
-import android.app.Activity
 import android.content.Intent
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,8 +19,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -38,7 +38,7 @@ import com.mououoo.kotlinpractices.viewmodel.AboutViewModel
 @Composable
 fun AboutScreen(aboutViewModel: AboutViewModel = viewModel()) {
     val context = LocalContext.current
-    val activity = LocalContext.current as? Activity
+    val activity = LocalActivity.current
     val menuItems by aboutViewModel.menuItems.collectAsState()
 
     Scaffold(
@@ -52,8 +52,9 @@ fun AboutScreen(aboutViewModel: AboutViewModel = viewModel()) {
                             activity?.finish()
                         }) {
                             Icon(
-                                Icons.Filled.ArrowBack,
-                                contentDescription = stringResource(R.string.back_btn))
+                                Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = stringResource(R.string.back_btn)
+                            )
                         }
                         Text(text = stringResource(id = R.string.about))
                         Spacer(modifier = Modifier.weight(1f))
@@ -101,10 +102,12 @@ fun MenuItem(text: String, onClick: () -> Unit) {
             Text(
                 text = text,
                 style = MaterialTheme.typography.body1,
-                fontWeight = FontWeight.Bold)
+                fontWeight = FontWeight.Bold
+            )
             Icon(
-                Icons.Filled.ArrowForward,
-                contentDescription = "Go")
+                Icons.AutoMirrored.Filled.ArrowForward,
+                contentDescription = "Go"
+            )
         }
     }
 }

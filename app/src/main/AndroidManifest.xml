@@ -37,7 +37,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".TaskThreeActivity"
+            android:name=".DispatcherTypeActivity"
             android:exported="false" />
 
         <activity

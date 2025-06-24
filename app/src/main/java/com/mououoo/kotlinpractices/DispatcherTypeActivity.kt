@@ -14,7 +14,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class TaskThreeActivity : AppCompatActivity() {
+class DispatcherTypeActivity : AppCompatActivity() {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main + Job())
 
@@ -27,7 +27,12 @@ class TaskThreeActivity : AppCompatActivity() {
                     onRunDefault = { onResult -> runWithDispatcher(Dispatchers.Default, onResult) },
                     onRunIO = { onResult -> runWithDispatcher(Dispatchers.IO, onResult) },
                     onRunMain = { onResult -> runWithDispatcher(Dispatchers.Main, onResult) },
-                    onRunUnconfined = { onResult -> runWithDispatcher(Dispatchers.Unconfined, onResult) }
+                    onRunUnconfined = { onResult ->
+                        runWithDispatcher(
+                            Dispatchers.Unconfined,
+                            onResult
+                        )
+                    }
                 )
             }
         }
@@ -41,22 +46,22 @@ class TaskThreeActivity : AppCompatActivity() {
             val threadName = Thread.currentThread().name
             SafeLogKotlin.d("DispatcherRun", "Running on: $threadName")
 
-            // Ambil data menggunakan suspend function fetchData()
+            // Get data using suspend function fetchData()
             val data = fetchData()
 
-            // Gabungkan info thread dengan data
+            // Combine the thread info with the data.
             val finalResult = "Running on: $threadName\n$data"
 
             // Update UI via Main dispatcher
             withContext(Dispatchers.Main) {
-                Toast.makeText(this@TaskThreeActivity, finalResult, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DispatcherTypeActivity, finalResult, Toast.LENGTH_SHORT).show()
                 onResult(finalResult)
             }
         }
     }
 
-    suspend fun fetchData(): String {
-        delay(2000) // Simulasi delay 2 detik
-        return "✅ Data berhasil diambil dari coroutine!"
+    private suspend fun fetchData(): String {
+        delay(2000) // 2 sec delay simulation
+        return "✅ Successfully fetched data from the coroutine!"
     }
 }

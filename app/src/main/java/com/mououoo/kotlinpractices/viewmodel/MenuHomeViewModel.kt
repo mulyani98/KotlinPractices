@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModel
 import com.mououoo.kotlinpractices.CoroutineActivity
+import com.mououoo.kotlinpractices.DispatcherTypeActivity
 import com.mououoo.kotlinpractices.KotlinNotesActivity
 import com.mououoo.kotlinpractices.R
 import com.mououoo.kotlinpractices.SimpleCoroutine
 import com.mououoo.kotlinpractices.TaskOneActivity
-import com.mououoo.kotlinpractices.TaskThreeActivity
 import com.mououoo.kotlinpractices.TaskTwoActivity
 import com.mououoo.kotlinpractices.ThreadAndExecutorActivity
 
@@ -28,15 +28,9 @@ class MenuHomeViewModel : ViewModel() {
                 }
             ),
             MenuItemData(
-                title = context.getString(R.string.go_to_task_three),
+                title = context.getString(R.string.go_to_dispatcher_type),
                 onClick = {
-                    context.startActivity(Intent(context, TaskThreeActivity::class.java))
-                }
-            ),
-            MenuItemData(
-                title = context.getString(R.string.kotlin_notes_title),
-                onClick = {
-                    context.startActivity(Intent(context, KotlinNotesActivity::class.java))
+                    context.startActivity(Intent(context, DispatcherTypeActivity::class.java))
                 }
             ),
             MenuItemData(
