@@ -3,6 +3,7 @@ package com.mououoo.kotlinpractices.viewmodel
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModel
+import com.mououoo.kotlinpractices.CalculatorActivity
 import com.mououoo.kotlinpractices.CoroutineActivity
 import com.mououoo.kotlinpractices.DispatcherTypeActivity
 import com.mououoo.kotlinpractices.KotlinNotesActivity
@@ -55,6 +56,12 @@ class MenuHomeViewModel : ViewModel() {
                 title = context.getString(R.string.thread_and_executor_title),
                 onClick = {
                     context.startActivity(Intent(context, ThreadAndExecutorActivity::class.java))
+                }
+            ),
+            MenuItemData(
+                title = context.getString(R.string.calc_title),
+                onClick = {
+                    context.startActivity(Intent(context, CalculatorActivity::class.java))
                 }
             )
         )

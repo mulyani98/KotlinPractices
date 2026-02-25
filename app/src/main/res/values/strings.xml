@@ -57,5 +57,7 @@
     <string name="running_coroutine_task">⏳Running Coroutine task…</string>
     <string name="cancelled_by_user">Cancelled by user</string>
 
+    <string name="calc_title">Calculator</string>
+
 
 </resources>
