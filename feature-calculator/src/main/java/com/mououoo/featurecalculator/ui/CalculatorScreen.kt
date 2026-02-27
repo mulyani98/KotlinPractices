@@ -1,4 +1,4 @@
-package com.mououoo.kotlinpractices.ui
+package com.mououoo.featurecalculator.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.mououoo.kotlinpractices.viewmodel.CalculatorViewModel
+import com.mououoo.featurecalculator.CalculatorViewModel
 
 @Composable
 fun CalculatorScreen(

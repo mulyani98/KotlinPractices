@@ -3,7 +3,7 @@ package com.mououoo.kotlinpractices.viewmodel
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModel
-import com.mououoo.kotlinpractices.CalculatorActivity
+import com.mououoo.featurecalculator.CalculatorActivity
 import com.mououoo.kotlinpractices.CoroutineActivity
 import com.mououoo.kotlinpractices.DispatcherTypeActivity
 import com.mououoo.kotlinpractices.KotlinNotesActivity

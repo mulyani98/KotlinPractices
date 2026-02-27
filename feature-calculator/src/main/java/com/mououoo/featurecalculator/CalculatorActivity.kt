@@ -1,10 +1,10 @@
-package com.mououoo.kotlinpractices;
+package com.mououoo.featurecalculator
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import com.mououoo.kotlinpractices.ui.CalculatorScreen
-import com.mououoo.kotlinpractices.ui.theme.MyAppTheme
+import com.mououoo.featurecalculator.ui.CalculatorScreen
+import com.mououoo.featurecalculator.ui.theme.MyAppTheme
 
 class CalculatorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

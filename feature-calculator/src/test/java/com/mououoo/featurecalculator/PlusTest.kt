@@ -1,7 +1,7 @@
-package com.mououoo.kotlinpractices
+package com.mououoo.featurecalculator
 
+import junit.framework.TestCase.assertEquals
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class PlusTest() {
 

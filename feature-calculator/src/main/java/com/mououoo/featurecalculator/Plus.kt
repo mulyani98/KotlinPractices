@@ -1,4 +1,4 @@
-package com.mououoo.kotlinpractices
+package com.mououoo.featurecalculator
 
 class Plus {
     fun plusFunction(a: Double, b: Double): Double {

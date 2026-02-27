@@ -1,7 +1,6 @@
-package com.mououoo.kotlinpractices.viewmodel
+package com.mououoo.featurecalculator
 
 import androidx.lifecycle.ViewModel
-import com.mououoo.kotlinpractices.Plus
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

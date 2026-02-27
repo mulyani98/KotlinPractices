@@ -65,7 +65,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".CalculatorActivity"
+            android:name="com.mououoo.featurecalculator.CalculatorActivity"
             android:exported="false" />
 
     </application>
