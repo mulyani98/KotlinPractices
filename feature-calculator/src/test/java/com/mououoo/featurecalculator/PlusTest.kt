@@ -1,5 +1,6 @@
 package com.mououoo.featurecalculator
 
+import com.mououoo.featurecalculator.old.Plus
 import junit.framework.TestCase.assertEquals
 import kotlin.test.Test
 

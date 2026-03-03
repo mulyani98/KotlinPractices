@@ -1,0 +1,200 @@
+🧠 BIG PICTURE FLOW
+Alur data di aplikasi ini adalah:
+
+User Click
+   ↓
+Composable (stateless)
+   ↓
+onEvent(event)
+   ↓
+ViewModel
+   ↓
+Update MutableStateFlow (copy())
+   ↓
+StateFlow emit
+   ↓
+collectAsStateWithLifecycle()
+   ↓
+Composable recomposes
+   ↓
+UI update
+
+- UI tidak pernah menyimpan state bisnis.
+- UI hanya render state.
+
+1️⃣ DOMAIN LAYER FLOW
+CalculatorOperation.kt
+Penjelasan:
+- Ini abstraction layer
+- ViewModel tidak tahu implementasi detail
+- Kalau mau tambah PowerOperation, tinggal buat class baru
+- Ini menerapkan Open/Closed Principle
+
+DivideOperation.kt
+Penjelasan:
+- Tidak melempar exception
+- Tidak pernah crash
+- Return null sebagai safe signal
+
+CalculatorUseCase.kt
+Penjelasan:
+- ViewModel tidak tahu operasi detail
+- Dependency di-inject via constructor
+- Clean Architecture terpenuhi
+- DIP (Dependency Inversion Principle)
+
+2️⃣ VIEWMODEL FLOW
+CalculatorUiState.kt
+Penjelasan:
+- Ini IMMUTABLE.
+- Setiap update:
+
+_uiState.value = current.copy(...)
+
+- Tidak pernah modify field langsung.
+- Kenapa ini penting?
+  - Predictable
+  - Thread-safe
+  - Tidak ada race condition
+  - Mudah di-test
+
+MutableStateFlow Setup
+Penjelasan:
+- UI hanya bisa observe.
+- UI tidak bisa mengubah state.
+Ini disebut controlled mutability.
+
+3️⃣ EVENT FLOW
+Sealed Event
+Kenapa sealed class?
+- Semua kemungkinan event diketahui compile-time
+- Tidak bisa ada event liar
+- Exhaustive when
+
+4️⃣ FLOW SAAT USER TEKAN ANGKA
+UI
+Penjelasan:
+- UI hanya kirim event.
+- Tidak ada logic matematika.
+
+ViewModel → onNumber()
+Penjelasan Flow:
+- Ambil snapshot lama
+- Buat state baru
+- Emit state baru
+- Compose otomatis recompose
+
+Tidak ada mutation.
+Tidak ada side-effect.
+
+5️⃣ FLOW SAAT TEKAN "="
+Penjelasan:
+Flow detail:
+1. Ambil state snapshot
+2. Parse safely (toDoubleOrNull)
+3. Validate
+4. Kirim ke UseCase
+5. Format hasil
+6. Emit state baru
+
+Tidak ada:
+- Exception
+- Crash
+- UI logic
+- Blocking call
+
+6️⃣ COMPOSE FLOW
+collectAsStateWithLifecycle
+Kenapa ini penting?
+- Tidak leak
+- Tidak collect saat background
+- Tidak perlu manual cancel
+- No memory leak risk
+
+Stateless Composable
+Ini PURE FUNCTION.
+
+Input:
+- state
+- event handler
+
+Output:
+- UI
+
+Tidak ada:
+- mutableStateOf
+- remember untuk business state
+- coroutine
+- logic berat
+
+🔹 sealed class CalculatorEvent
+
+Ini bukan class biasa.
+
+sealed class artinya:
+- Semua subclass HARUS didefinisikan di file yang sama
+- Compiler tahu semua kemungkinan tipe event
+- Bisa exhaustive when tanpa else
+
+Kenapa ini penting?
+Karena di ViewModel nanti:
+
+when(event) {
+   is OnNumberClick -> ...
+   is OnOperatorClick -> ...
+   OnEqualClick -> ...
+   OnClearClick -> ...
+}
+
+Kalau kamu lupa satu case → compiler error.
+Itu power-nya sealed class.
+
+🔥 FLOW FINAL YANG TERJADI
+
+Misal user tekan:
+
+7
++
+5
+=
+
+Flow:
+
+OnNumberClick("7")
+→ currentInput = "7"
+→ expression = "7"
+
+OnOperatorClick("+")
+→ firstOperand = "7"
+→ operator = "+"
+→ expression = "7+"
+
+OnNumberClick("5")
+→ currentInput = "5"
+→ expression = "7+5"
+
+OnEqualClick
+→ parse 7 dan 5
+→ useCase.execute("+", 7, 5)
+→ result = "= 12"
+
+UI hanya render state.
+
+🧠 Full Flow Explanation
+→ Ketika user menekan tombol angka di layar, misalnya “7”, UI akan mengirimkan event OnNumberClick("7") ke CalculatorViewModel,
+lalu ViewModel akan memproses input tersebut dengan memperbarui currentInput dan membangun ulang expression,
+kemudian MutableStateFlow meng-emit state baru yang secara otomatis dikoleksi oleh Compose menggunakan collectAsStateWithLifecycle(),
+sehingga UI melakukan recomposition dan menampilkan angka tersebut di display.
+
+→ Selanjutnya ketika user menekan operator seperti “+”, UI mengirim OnOperatorClick("+"),
+lalu ViewModel menyimpan angka pertama sebagai firstOperand, menyimpan operator yang dipilih,
+mengosongkan currentInput, dan memperbarui expression, kemudian state baru kembali di-emit dan UI menampilkan ekspresi seperti 7+.
+
+→ Ketika user memasukkan angka kedua misalnya “5”, prosesnya sama seperti input pertama: event dikirim ke ViewModel,
+currentInput diperbarui menjadi "5", expression menjadi "7+5", lalu state baru dipancarkan dan
+UI langsung memperbarui tampilan tanpa perlu refresh manual.
+
+→ Terakhir ketika user menekan tombol “=”, UI mengirim OnEqualClick, lalu ViewModel mengambil firstOperand,
+operator, dan currentInput, mengonversinya ke Double, memanggil CalculatorUseCase untuk melakukan perhitungan,
+menangani kemungkinan error seperti pembagian dengan nol, memformat hasilnya, lalu memperbarui result dalam uiState,
+sehingga Compose kembali melakukan recomposition dan menampilkan hasil seperti = 12 di bawah ekspresi.

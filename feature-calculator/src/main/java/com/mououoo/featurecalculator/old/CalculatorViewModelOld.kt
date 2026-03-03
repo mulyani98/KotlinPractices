@@ -1,10 +1,11 @@
-package com.mououoo.featurecalculator
+package com.mououoo.featurecalculator.old
 
 import androidx.lifecycle.ViewModel
+import com.mououoo.featurecalculator.old.Plus
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class CalculatorViewModel: ViewModel() {
+class CalculatorViewModelOld: ViewModel() {
 
     private val plus = Plus()
 

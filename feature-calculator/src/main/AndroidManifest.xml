@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
-        <activity android:name=".CalculatorActivity" />
+        <activity android:name=".ui.CalculatorActivity" />
+        <activity android:name=".old.CalculatorActivityOld"/>
     </application>
 
 </manifest>
