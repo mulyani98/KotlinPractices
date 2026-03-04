@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
+    testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     testImplementation(kotlin("test"))
@@ -50,4 +51,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.androidx.activity.compose)
+
+    // for checking memory leak
+    // debugImplementation because LeakCanary should only run in debug builds.
+    debugImplementation(libs.leakcanary.android)
 }
