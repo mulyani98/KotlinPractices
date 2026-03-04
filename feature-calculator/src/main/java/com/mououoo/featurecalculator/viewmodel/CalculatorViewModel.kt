@@ -20,11 +20,20 @@ class CalculatorViewModel(
     )
 ) : ViewModel() {
 
-    // Internal mutable state holder
+    // Internal mutable state holder (can be changed, the ones here are private)
     private val _uiState = MutableStateFlow(CalculatorUiState())
 
-    // Public immutable state exposed to UI
+    // Public immutable state exposed to UI (it cannot be changed outside vm)
     val uiState: StateFlow<CalculatorUiState> = _uiState.asStateFlow()
+
+    /*  UI ➜ send Event
+        ViewModel ➜ update State
+        State ➜ update UI
+
+        ➜ _uiState.value → gets the current full state
+        ➜ copy(...) → creates a new instance with some fields modified
+        ➜ _uiState.value = ... → emits the new state to the UI
+     */
 
     // Handles all incoming UI events
     fun onEvent(event: CalculatorEvent) {
@@ -63,13 +72,13 @@ class CalculatorViewModel(
 
         // Update state with new input and rebuilt expression
         _uiState.value = current.copy(
-            currentInput = newInput,
-            expression = buildExpression(
-                current.firstOperand,
-                current.operator,
-                newInput
+            currentInput = newInput, // update the number currently being typed by user
+            expression = buildExpression( // build the expression string to display in UI
+                current.firstOperand, // first number entered (before operator)
+                current.operator, // operator selected
+                newInput // current number being typed (second operand if operator selected)
             ),
-            result = ""
+            result = "" // clear previous result while typing new number
         )
     }
 
@@ -81,13 +90,13 @@ class CalculatorViewModel(
         // Ignore if no number has been entered
         if (current.currentInput.isBlank()) return
 
-        // Save first operand and selected operator
+        // Update state
         _uiState.value = current.copy(
-            firstOperand = current.currentInput,
-            operator = operator,
-            currentInput = "",
-            expression = current.currentInput + operator,
-            result = ""
+            firstOperand = current.currentInput, // save the first number entered before operator
+            operator = operator, // save selected operator
+            currentInput = "", // reset for next number after operator
+            expression = current.currentInput + operator, // build string to display in UI (e.g., "7+")
+            result = "" // clear previous result since calculation not done yet
         )
     }
 
@@ -106,7 +115,7 @@ class CalculatorViewModel(
             return
         }
 
-        // Perform calculation through use case
+        // Perform calculation through use case (as usecase know how to calculate, while vm doesn't know)
         val resultValue = useCase.calculate(current.operator, first, second)
 
         // If calculation failed (e.g., division by zero), show error
@@ -120,7 +129,7 @@ class CalculatorViewModel(
 
         // Update state with calculated result
         _uiState.value = current.copy(
-            result = "=  $formatted"
+            result = " $formatted"
         )
     }
 
@@ -159,13 +168,13 @@ class CalculatorViewModel(
         }
     }
 
-    // Formats result to remove unnecessary decimal part
+    // Formats double result to string and remove unnecessary decimal part
     private fun formatResult(value: Double): String {
         return if (value % 1.0 == 0.0) {
-            // If whole number, convert to Long
+            // If whole number, convert to Long (e.g 12)
             value.toLong().toString()
         } else {
-            // Otherwise keep decimal value
+            // Otherwise keep decimal value (e.g 12.5)
             value.toString()
         }
     }

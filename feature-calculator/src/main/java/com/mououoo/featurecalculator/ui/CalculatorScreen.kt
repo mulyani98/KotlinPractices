@@ -37,7 +37,7 @@ fun CalculatorScreen(
 }
 
 @Composable
-// Main UI layout for calculator
+// Main UI layout for calculator (Pure UI, doesn't know vm, stateflow, data, only know state)
 fun CalculatorContent(
     state: CalculatorUiState,
     onEvent: (CalculatorEvent) -> Unit
@@ -67,35 +67,35 @@ fun CalculatorContent(
                 .padding(bottom = 32.dp)
         )
 
-        val buttons = listOf(
+        val calcButtons = listOf(
             listOf("7","8","9","/"),
             listOf("4","5","6","*"),
             listOf("1","2","3","-"),
             listOf("C","0","=","+")
         )
 
-        buttons.forEach { row ->
+        calcButtons.forEach { row ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                row.forEach { label ->
+                row.forEach { button ->
                     Button(
                         onClick = {
-                            when (label) {
+                            when (button) {
                                 "C" -> onEvent(CalculatorEvent.OnClearClick)
                                 "=" -> onEvent(CalculatorEvent.OnEqualClick)
                                 "+", "-", "*", "/"
-                                    -> onEvent(CalculatorEvent.OnOperatorClick(label))
+                                    -> onEvent(CalculatorEvent.OnOperatorClick(button))
                                 else
-                                    -> onEvent(CalculatorEvent.OnNumberClick(label))
+                                    -> onEvent(CalculatorEvent.OnNumberClick(button))
                             }
                         },
                         modifier = Modifier
                             .weight(1f)
                             .padding(4.dp)
                     ) {
-                        Text(label)
+                        Text(button)
                     }
                 }
             }
