@@ -115,7 +115,7 @@ class CalculatorViewModel(
             return
         }
 
-        // Perform calculation through use case (as usecase know how to calculate, while vm doesn't know)
+        // Perform calculation through use case (as Use Case know how to calculate, while vm doesn't know)
         val resultValue = useCase.calculate(current.operator, first, second)
 
         // If calculation failed (e.g., division by zero), show error
@@ -171,10 +171,10 @@ class CalculatorViewModel(
     // Formats double result to string and remove unnecessary decimal part
     private fun formatResult(value: Double): String {
         return if (value % 1.0 == 0.0) {
-            // If whole number, convert to Long (e.g 12)
+            // If whole number, convert to Long (e.g. 12)
             value.toLong().toString()
         } else {
-            // Otherwise keep decimal value (e.g 12.5)
+            // Otherwise keep decimal value (e.g. 12.5)
             value.toString()
         }
     }

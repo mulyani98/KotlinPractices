@@ -14,6 +14,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -53,7 +54,9 @@ fun CalculatorContent(
         Text(
             text = state.expression,
             style = MaterialTheme.typography.h2,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag("expression") // ID for testing
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -65,6 +68,7 @@ fun CalculatorContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 32.dp)
+                .testTag("result") // ID for testing
         )
 
         val calcButtons = listOf(
