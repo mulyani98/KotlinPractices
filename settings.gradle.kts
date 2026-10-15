@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "KotlinPractices"
 include(":app")
- 
+include(":feature-calculator")

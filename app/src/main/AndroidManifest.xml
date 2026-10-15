@@ -4,7 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
     <application
@@ -16,9 +17,10 @@
         android:roundIcon="@mipmap/kotlin_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KotlinPractices"
-        tools:targetApi="31" >
+        tools:targetApi="31">
 
-        <activity android:name=".HomeActivity"
+        <activity
+            android:name=".activity.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,25 +28,49 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".TaskOneActivity"
-            android:exported="false">
-        </activity>
+        <activity
+            android:name=".activity.TaskOneActivity"
+            android:exported="false" />
 
-        <activity android:name=".TaskTwoActivity"
-            android:exported="false">
-        </activity>
+        <activity
+            android:name=".activity.TaskTwoActivity"
+            android:exported="false" />
 
-        <activity android:name=".KotlinNotesActivity"
-            android:exported="false">
-        </activity>
+        <activity
+            android:name=".activity.DispatcherTypeActivity"
+            android:exported="false" />
 
-        <activity android:name=".AboutActivity"
-            android:exported="false">
-        </activity>
+        <activity
+            android:name=".activity.KotlinNotesActivity"
+            android:exported="false" />
 
-        <activity android:name=".WebViewActivity"
-            android:exported="false">
-        </activity>
+        <activity
+            android:name=".activity.CoroutineActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".SimpleCoroutine"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.ThreadAndExecutorActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.AboutActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.WebViewActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.mououoo.featurecalculator.old.CalculatorActivityOld"
+            android:exported="false" />
+
+        <activity
+            android:name="com.mououoo.featurecalculator.ui.CalculatorActivity"
+            android:exported="false" />
 
     </application>
 

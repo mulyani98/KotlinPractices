@@ -1,6 +1,6 @@
 package com.mououoo.kotlinpractices.ui
 
-import android.app.Activity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,11 +15,10 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,7 +27,7 @@ import com.mououoo.kotlinpractices.R
 
 @Composable
 fun KotlinNotesScreen() {
-    val activity = LocalContext.current as? Activity
+    val activity = LocalActivity.current
 
     Scaffold(
         topBar = {
@@ -41,8 +40,9 @@ fun KotlinNotesScreen() {
                             activity?.finish()
                         }) {
                             Icon(
-                                Icons.Filled.ArrowBack,
-                                contentDescription = stringResource(R.string.back_btn))
+                                Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = stringResource(R.string.back_btn)
+                            )
                         }
                         Text(text = stringResource(id = R.string.kotlin_notes_title))
                         Spacer(modifier = Modifier.weight(1f))

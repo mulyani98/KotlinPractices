@@ -8,11 +8,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -38,7 +41,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.mououoo.kotlinpractices.AboutActivity
+import com.mououoo.kotlinpractices.activity.AboutActivity
 import com.mououoo.kotlinpractices.R
 import com.mououoo.kotlinpractices.viewmodel.MenuHomeViewModel
 
@@ -46,6 +49,7 @@ import com.mououoo.kotlinpractices.viewmodel.MenuHomeViewModel
 fun MainScreen(menuViewModel: MenuHomeViewModel = viewModel()) {
     val context = LocalContext.current
     val menuItems = menuViewModel.getMenuItems(context)
+    val insets = WindowInsets.systemBars.asPaddingValues()
 
     Scaffold(
         topBar = {
@@ -59,21 +63,25 @@ fun MainScreen(menuViewModel: MenuHomeViewModel = viewModel()) {
                         IconButton(onClick = {
                             context.startActivity(Intent(context, AboutActivity::class.java))
                         }) {
-                            Icon(Icons.Filled.Info, contentDescription = stringResource(R.string.about))
+                            Icon(
+                                Icons.Filled.Info,
+                                contentDescription = stringResource(R.string.about)
+                            )
                         }
                     }
                 },
                 backgroundColor = MaterialTheme.colors.primary
             )
-        }
+        },
+        modifier = Modifier.padding(insets)
     ) { paddingValues ->
-        Column (
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
                 .padding(16.dp),
             verticalArrangement = Arrangement.SpaceBetween
-        ){
+        ) {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 modifier = Modifier
@@ -86,7 +94,8 @@ fun MainScreen(menuViewModel: MenuHomeViewModel = viewModel()) {
                 items(menuItems) { menuItem ->
                     HomeItem(
                         text = menuItem.title,
-                        onClick = menuItem.onClick)
+                        onClick = menuItem.onClick
+                    )
                 }
             }
 
@@ -119,7 +128,8 @@ fun HomeItem(text: String, onClick: () -> Unit) {
                 .fillMaxWidth(),
             contentAlignment = Alignment.Center
         ) {
-            Text(text = text,
+            Text(
+                text = text,
                 style = MaterialTheme.typography.body1.copy(
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp
