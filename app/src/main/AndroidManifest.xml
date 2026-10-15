@@ -20,7 +20,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".HomeActivity"
+            android:name=".activity.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,23 +29,23 @@
         </activity>
 
         <activity
-            android:name=".TaskOneActivity"
+            android:name=".activity.TaskOneActivity"
             android:exported="false" />
 
         <activity
-            android:name=".TaskTwoActivity"
+            android:name=".activity.TaskTwoActivity"
             android:exported="false" />
 
         <activity
-            android:name=".DispatcherTypeActivity"
+            android:name=".activity.DispatcherTypeActivity"
             android:exported="false" />
 
         <activity
-            android:name=".KotlinNotesActivity"
+            android:name=".activity.KotlinNotesActivity"
             android:exported="false" />
 
         <activity
-            android:name=".CoroutineActivity"
+            android:name=".activity.CoroutineActivity"
             android:exported="false" />
 
         <activity
@@ -53,15 +53,15 @@
             android:exported="false" />
 
         <activity
-            android:name=".ThreadAndExecutorActivity"
+            android:name=".activity.ThreadAndExecutorActivity"
             android:exported="false" />
 
         <activity
-            android:name=".AboutActivity"
+            android:name=".activity.AboutActivity"
             android:exported="false" />
 
         <activity
-            android:name=".WebViewActivity"
+            android:name=".activity.WebViewActivity"
             android:exported="false" />
 
         <activity

@@ -41,7 +41,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.mououoo.kotlinpractices.AboutActivity
+import com.mououoo.kotlinpractices.activity.AboutActivity
 import com.mououoo.kotlinpractices.R
 import com.mououoo.kotlinpractices.viewmodel.MenuHomeViewModel
 

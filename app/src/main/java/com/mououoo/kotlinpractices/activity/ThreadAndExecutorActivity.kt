@@ -1,4 +1,4 @@
-package com.mououoo.kotlinpractices
+package com.mououoo.kotlinpractices.activity
 
 import android.os.Bundle
 import android.os.Handler
@@ -7,7 +7,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.mououoo.kotlinpractices.R
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
@@ -34,6 +36,8 @@ class ThreadAndExecutorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_thread_executor)
+
+        enableEdgeToEdge()
 
         btnThread = findViewById(R.id.btnStartThread)
         btnExecutor = findViewById(R.id.btnStartExecutor)

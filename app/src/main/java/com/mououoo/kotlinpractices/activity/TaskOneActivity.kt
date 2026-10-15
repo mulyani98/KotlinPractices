@@ -1,7 +1,8 @@
-package com.mououoo.kotlinpractices
+package com.mououoo.kotlinpractices.activity
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.mououoo.kotlinpractices.ui.TaskOneScreen
@@ -14,6 +15,8 @@ class TaskOneActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[CounterViewModel::class.java]
+
+        enableEdgeToEdge()
 
         setContent {
             MyAppTheme {

@@ -5,14 +5,14 @@ import android.content.Intent
 import androidx.lifecycle.ViewModel
 import com.mououoo.featurecalculator.old.CalculatorActivityOld
 import com.mououoo.featurecalculator.ui.CalculatorActivity
-import com.mououoo.kotlinpractices.CoroutineActivity
-import com.mououoo.kotlinpractices.DispatcherTypeActivity
-import com.mououoo.kotlinpractices.KotlinNotesActivity
+import com.mououoo.kotlinpractices.activity.CoroutineActivity
+import com.mououoo.kotlinpractices.activity.DispatcherTypeActivity
+import com.mououoo.kotlinpractices.activity.KotlinNotesActivity
 import com.mououoo.kotlinpractices.R
 import com.mououoo.kotlinpractices.SimpleCoroutine
-import com.mououoo.kotlinpractices.TaskOneActivity
-import com.mououoo.kotlinpractices.TaskTwoActivity
-import com.mououoo.kotlinpractices.ThreadAndExecutorActivity
+import com.mououoo.kotlinpractices.activity.TaskOneActivity
+import com.mououoo.kotlinpractices.activity.TaskTwoActivity
+import com.mououoo.kotlinpractices.activity.ThreadAndExecutorActivity
 
 class MenuHomeViewModel : ViewModel() {
     fun getMenuItems(context: Context): List<MenuItemData> {

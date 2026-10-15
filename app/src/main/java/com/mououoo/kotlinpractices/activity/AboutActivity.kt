@@ -1,21 +1,21 @@
-package com.mououoo.kotlinpractices
+package com.mououoo.kotlinpractices.activity
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
-import com.mououoo.kotlinpractices.ui.MainScreen
+import com.mououoo.kotlinpractices.ui.AboutScreen
 import com.mououoo.kotlinpractices.ui.theme.MyAppTheme
 
-
-class HomeActivity : AppCompatActivity() {
+class AboutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        enableEdgeToEdge()
 
         setContent {
             MyAppTheme {
-                MainScreen()
+                AboutScreen()
             }
         }
     }

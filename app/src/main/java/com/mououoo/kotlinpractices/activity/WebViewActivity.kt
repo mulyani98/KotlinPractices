@@ -1,16 +1,20 @@
-package com.mououoo.kotlinpractices
+package com.mououoo.kotlinpractices.activity
 
 import android.os.Bundle
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.mououoo.kotlinpractices.R
 
 class WebViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
+
+        enableEdgeToEdge()
 
         val url = intent.getStringExtra("url")
         val webView: WebView = findViewById(R.id.webViewId)

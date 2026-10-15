@@ -1,11 +1,13 @@
-package com.mououoo.kotlinpractices
+package com.mououoo.kotlinpractices.activity
 
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import com.mououoo.kotlinpractices.R
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +27,9 @@ class CoroutineActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coroutine)
+
+        enableEdgeToEdge()
+
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         val resultTextView = findViewById<TextView>(R.id.resultTextView)

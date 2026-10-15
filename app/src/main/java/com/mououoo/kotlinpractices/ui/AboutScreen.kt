@@ -32,7 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mououoo.kotlinpractices.R
-import com.mououoo.kotlinpractices.WebViewActivity
+import com.mououoo.kotlinpractices.activity.WebViewActivity
 import com.mououoo.kotlinpractices.viewmodel.AboutViewModel
 
 @Composable
