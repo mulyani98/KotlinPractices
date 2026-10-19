@@ -19,4 +19,5 @@
     <color name="sand_white">#ECEBE4</color>
     <color name="rust_red">#D56062</color>
     <color name="bright_red">#FF0000</color>
+    <color name="kotlin_icon_background">#89E067</color>
 </resources>

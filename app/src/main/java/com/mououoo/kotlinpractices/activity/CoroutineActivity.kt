@@ -26,9 +26,8 @@ class CoroutineActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coroutine)
-
         enableEdgeToEdge()
+        setContentView(R.layout.activity_coroutine)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 

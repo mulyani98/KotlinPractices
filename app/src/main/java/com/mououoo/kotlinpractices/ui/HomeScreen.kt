@@ -63,14 +63,6 @@ fun MainScreen(menuViewModel: MenuHomeViewModel = viewModel()) {
                     ) {
                         Text(text = stringResource(id = R.string.app_name))
                         Spacer(modifier = Modifier.weight(1f))
-                        IconButton(onClick = {
-                            context.startActivity(Intent(context, AboutActivity::class.java))
-                        }) {
-                            Icon(
-                                Icons.Filled.Info,
-                                contentDescription = stringResource(R.string.about)
-                            )
-                        }
                     }
                 },
                 backgroundColor = MaterialTheme.colors.primary
@@ -85,6 +77,15 @@ fun MainScreen(menuViewModel: MenuHomeViewModel = viewModel()) {
                 .padding(16.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
+
+            HomeItemWithIcon(
+                text = stringResource(id = R.string.about),
+                onClick = {
+                    context.startActivity(Intent(context, AboutActivity::class.java))
+                },
+                iconRes = R.mipmap.ic_google_sign_in
+            )
+
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 modifier = Modifier
@@ -104,13 +105,7 @@ fun MainScreen(menuViewModel: MenuHomeViewModel = viewModel()) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            HomeItemWithIcon(
-                text = stringResource(id = R.string.about),
-                onClick = {
-                    context.startActivity(Intent(context, AboutActivity::class.java))
-                },
-                iconRes = R.mipmap.ic_google_sign_in
-            )
+
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.mououoo.kotlinpractices
+package com.mououoo.kotlinpractices.util
 
 import android.util.Log
 

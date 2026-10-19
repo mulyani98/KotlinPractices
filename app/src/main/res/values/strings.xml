@@ -60,5 +60,9 @@
     <string name="calc_title_old">Calculator Old</string>
     <string name="calc_title">Calculator</string>
 
+    <string name="coroutine_user_title">Coroutine User</string>
+    <string name="coroutine_employee_title">Coroutine Employee</string>
+
+
 
 </resources>

@@ -57,4 +57,7 @@ dependencies {
     // for checking memory leak
     // debugImplementation because LeakCanary should only run in debug builds.
     debugImplementation(libs.leakcanary.android)
+
+    implementation (libs.kotlinx.coroutines.core)
+    testImplementation (libs.org.jetbrains.kotlinx.coroutines.test)
 }

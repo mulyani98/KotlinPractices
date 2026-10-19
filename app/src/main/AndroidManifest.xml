@@ -49,7 +49,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".SimpleCoroutine"
+            android:name=".activity.SimpleCoroutineActivity"
             android:exported="false" />
 
         <activity
@@ -71,6 +71,16 @@
         <activity
             android:name="com.mououoo.featurecalculator.ui.CalculatorActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".trial.user.UserActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".trial.employee.EmployeeActivity"
+            android:exported="false">
+        </activity>
 
     </application>
 

@@ -3,16 +3,17 @@ package com.mououoo.kotlinpractices.viewmodel
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModel
-import com.mououoo.featurecalculator.old.CalculatorActivityOld
 import com.mououoo.featurecalculator.ui.CalculatorActivity
+import com.mououoo.kotlinpractices.R
+import com.mououoo.kotlinpractices.activity.SimpleCoroutineActivity
 import com.mououoo.kotlinpractices.activity.CoroutineActivity
 import com.mououoo.kotlinpractices.activity.DispatcherTypeActivity
 import com.mououoo.kotlinpractices.activity.KotlinNotesActivity
-import com.mououoo.kotlinpractices.R
-import com.mououoo.kotlinpractices.SimpleCoroutine
 import com.mououoo.kotlinpractices.activity.TaskOneActivity
 import com.mououoo.kotlinpractices.activity.TaskTwoActivity
 import com.mououoo.kotlinpractices.activity.ThreadAndExecutorActivity
+import com.mououoo.kotlinpractices.trial.employee.EmployeeActivity
+import com.mououoo.kotlinpractices.trial.user.UserActivity
 
 class MenuHomeViewModel : ViewModel() {
     fun getMenuItems(context: Context): List<MenuItemData> {
@@ -50,7 +51,7 @@ class MenuHomeViewModel : ViewModel() {
             MenuItemData(
                 title = context.getString(R.string.simple_coroutine_title),
                 onClick = {
-                    context.startActivity(Intent(context, SimpleCoroutine::class.java))
+                    context.startActivity(Intent(context, SimpleCoroutineActivity::class.java))
                 }
             ),
             MenuItemData(
@@ -60,15 +61,21 @@ class MenuHomeViewModel : ViewModel() {
                 }
             ),
             MenuItemData(
-                title = context.getString(R.string.calc_title_old),
-                onClick = {
-                    context.startActivity(Intent(context, CalculatorActivityOld::class.java))
-                }
-            ),
-            MenuItemData(
                 title = context.getString(R.string.calc_title),
                 onClick = {
                     context.startActivity(Intent(context, CalculatorActivity::class.java))
+                }
+            ),
+            MenuItemData(
+                title = context.getString(R.string.coroutine_user_title),
+                onClick = {
+                    context.startActivity(Intent(context, UserActivity::class.java))
+                }
+            ),
+            MenuItemData(
+                title = context.getString(R.string.coroutine_employee_title),
+                onClick = {
+                    context.startActivity(Intent(context, EmployeeActivity::class.java))
                 }
             )
         )

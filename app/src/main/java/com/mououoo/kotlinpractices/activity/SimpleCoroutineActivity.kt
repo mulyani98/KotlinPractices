@@ -1,10 +1,11 @@
-package com.mououoo.kotlinpractices
+package com.mououoo.kotlinpractices.activity
 
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.mououoo.kotlinpractices.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.cancellation.CancellationException
 
-class SimpleCoroutine : AppCompatActivity() {
+class SimpleCoroutineActivity : AppCompatActivity() {
 
     private lateinit var tvStatus: TextView
     private lateinit var progressBar: ProgressBar

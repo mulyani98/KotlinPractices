@@ -5,7 +5,7 @@ import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.mououoo.kotlinpractices.SafeLogKotlin
+import com.mououoo.kotlinpractices.util.SafeLogKotlin
 import com.mououoo.kotlinpractices.ui.TaskThreeScreen
 import com.mououoo.kotlinpractices.ui.theme.MyAppTheme
 import kotlinx.coroutines.CoroutineDispatcher

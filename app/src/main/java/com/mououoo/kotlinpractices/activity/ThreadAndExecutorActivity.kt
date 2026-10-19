@@ -35,9 +35,8 @@ class ThreadAndExecutorActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_thread_executor)
-
         enableEdgeToEdge()
+        setContentView(R.layout.activity_thread_executor)
 
         btnThread = findViewById(R.id.btnStartThread)
         btnExecutor = findViewById(R.id.btnStartExecutor)
