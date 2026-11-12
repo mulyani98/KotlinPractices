@@ -1,39 +1,61 @@
 package com.mououoo.kotlinpractices.trial.employee
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
-fun EmployeeScreen(viewModel: EmployeeTrialViewModel = EmployeeTrialViewModel()) {
-    val tableData by viewModel.stateApplicationTeam.collectAsState()
+fun EmployeeScreen(viewModel: EmployeeViewModel = EmployeeViewModel()) {
+    val employee by viewModel.stateEmployee.collectAsStateWithLifecycle()
 
-    if (tableData == null) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            CircularProgressIndicator()
-        }
-    } else {
-        val data = tableData!!
+    val context = LocalContext.current
 
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text("Name: ${data.name}")
-            Text("No: ${data.no}")
-            Text("History: ${data.history}")
+    LaunchedEffect(viewModel) {
+        viewModel.event.collect { event ->
+            when (event) {
+                EmployeeEvent.EmployeeLoaded -> {
+                    Toast.makeText(
+                        context,
+                        "Employee Loaded!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                is EmployeeEvent.Error -> {
+                    Toast.makeText(
+                        context,
+                        event.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
+    }
+
+    Column (
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "Name: ${employee?.name?: "Loading..."}"
+        )
+
+        Text(
+            text = "NIK: ${employee?.nik?: "Loading..."}"
+        )
+
+        Text(
+            text = "History: ${employee?.history?: "Loading..."}"
+        )
     }
 }

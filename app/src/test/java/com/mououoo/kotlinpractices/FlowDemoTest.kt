@@ -1,15 +1,16 @@
 package com.mououoo.kotlinpractices
 
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.transform
+import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
+import kotlin.time.Duration.Companion.milliseconds
 
 class FlowDemoTest {
 
@@ -90,5 +91,36 @@ class FlowDemoTest {
             }
     }
 
+    @Test
+    fun `combine vs zip`() = runBlocking {
+        val a = flow {
+            emit("A")
+            delay(100.milliseconds)
+            emit("B")
+            delay(100.milliseconds)
+            emit("C")
+        }
+
+        val b = flow {
+            delay(50.milliseconds)
+            emit(1)
+            delay(100.milliseconds)
+            emit(2)
+        }
+
+        log("-- combine --")
+        a.combine(b) { x, y ->
+            "$x$y"
+        }.collect {
+            log("combine result: $it")
+        }
+
+        log("-- zip --")
+        a.zip(b) { x, y ->
+            "$x$y"
+        }.collect {
+            log("zip result: $it")
+        }
+    }
 
 }

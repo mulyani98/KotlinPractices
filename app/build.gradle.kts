@@ -15,12 +15,12 @@ android {
         }
     }
     namespace = "com.mououoo.kotlinpractices"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.mououoo.kotlinpractices"
-        minSdk = 26
-        targetSdk = 35
+        minSdk = 29
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -82,6 +82,7 @@ dependencies {
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.compose.remote.creation.compose)
 
     testImplementation(libs.org.jetbrains.kotlinx.coroutines.test)
     testImplementation(libs.robolectric)
