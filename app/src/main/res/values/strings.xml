@@ -63,6 +63,8 @@
     <string name="coroutine_user_title">Coroutine User</string>
     <string name="coroutine_employee_title">Coroutine Employee</string>
 
+    <string name="jetpack_compose_title">Jetpack Compose</string>
+
 
 
 </resources>

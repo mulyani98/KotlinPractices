@@ -12,6 +12,7 @@ import com.mououoo.kotlinpractices.activity.KotlinNotesActivity
 import com.mououoo.kotlinpractices.activity.TaskOneActivity
 import com.mououoo.kotlinpractices.activity.TaskTwoActivity
 import com.mououoo.kotlinpractices.activity.ThreadAndExecutorActivity
+import com.mououoo.kotlinpractices.jetpackcompose.JetpackComposeMain
 import com.mououoo.kotlinpractices.trial.employee.EmployeeActivity
 import com.mououoo.kotlinpractices.trial.user.UserActivity
 
@@ -76,6 +77,12 @@ class MenuHomeViewModel : ViewModel() {
                 title = context.getString(R.string.coroutine_employee_title),
                 onClick = {
                     context.startActivity(Intent(context, EmployeeActivity::class.java))
+                }
+            ),
+            MenuItemData(
+                title = context.getString(R.string.jetpack_compose_title),
+                onClick = {
+                    context.startActivity(Intent(context, JetpackComposeMain::class.java))
                 }
             )
         )

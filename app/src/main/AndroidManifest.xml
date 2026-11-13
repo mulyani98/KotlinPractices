@@ -82,6 +82,11 @@
             android:exported="false">
         </activity>
 
+        <activity
+            android:name=".jetpackcompose.JetpackComposeMain"
+            android:exported="false">
+        </activity>
+
     </application>
 
 </manifest>
