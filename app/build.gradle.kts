@@ -99,4 +99,6 @@ dependencies {
     testImplementation(kotlin("test"))
 
     implementation(project(":feature-calculator"))
+
+    implementation(libs.androidx.constraintlayout.compose)
 }
