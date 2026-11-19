@@ -18,9 +18,11 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FaceRetouchingNatural
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -64,6 +66,7 @@ fun ModifierOrderB() {
     )
 }
 
+@Preview
 @Composable
 fun RecompositionDemo() {
     println("RecompositionDemo called")
@@ -131,25 +134,6 @@ fun BoxDemo() {
 
 @Preview
 @Composable
-fun ExampleOfSpacerInsideRow() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.Cyan)
-            .padding(12.dp)
-            .background(Color.White),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text("Left")
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        Text("Right")
-    }
-}
-
-@Preview
-@Composable
 fun ItemVsItemsLazyColumn() {
     LazyColumn {
         item {
@@ -165,6 +149,25 @@ fun ItemVsItemsLazyColumn() {
             Spacer(modifier = Modifier.height(15.dp))
             Text("Footer", style = MaterialTheme.typography.h6)
         }
+    }
+}
+
+@Preview
+@Composable
+fun ExampleOfSpacerInsideRow() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.Cyan)
+            .padding(12.dp)
+            .background(Color.White),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text("Left")
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text("Right")
     }
 }
 
@@ -197,5 +200,96 @@ fun ConstraintExample() {
         ) {
             Text("Click Me")
         }
+    }
+}
+
+@Preview
+@Composable
+fun CounterWithState() {
+    var number by rememberSaveable {
+        mutableIntStateOf(0)
+    }
+
+    val numberTwo = remember {
+        mutableIntStateOf(0)
+    }
+
+    var numberThree = remember {
+        0
+    }
+
+    Column {
+        Text("Number = $number")
+        Text("Number Two = ${numberTwo.intValue}")
+        Text("Number Three = $numberThree")
+
+        Button(
+            onClick = {
+                number++
+                numberTwo.intValue++
+                numberThree++
+            }
+        ) {
+            Text("Addition")
+        }
+    }
+}
+
+@Preview
+@Composable
+fun CounterWithReadyOnlyState() {
+
+    val mutable = remember {
+        mutableIntStateOf(0)
+    }
+
+    val readOnly: State<Int> = mutable
+
+    Column {
+        Text(
+            text = "Value = ${readOnly.value}"
+        )
+
+        Button(
+            onClick = {
+                mutable.intValue++
+            }
+        ) {
+            Text("Addition")
+        }
+    }
+}
+
+
+@Composable
+fun Counter(
+    number: Int,
+    onAddition: () -> Unit
+) {
+    Button(
+        onClick = onAddition
+    ) {
+        Text("$number")
+    }
+}
+
+@Preview
+@Composable
+fun CounterScreen() {
+    var number by remember {
+        mutableIntStateOf(0)
+    }
+
+    Column {
+        Counter(
+            number = number,
+            onAddition = {
+                number++
+            }
+        )
+
+        Text(
+            text = "Total = $number"
+        )
     }
 }
